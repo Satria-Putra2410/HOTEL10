@@ -5,14 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Kamar</title>
     <script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
+
+    body {
+      font-family: 'Lato', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%);
+    }
+
+</style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="gradient-bg text-white ">
     
     <?= $this->include('layouts/admin_navbar') ?>
 
     <div class="container mx-auto mt-8 p-5">
         <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-extrabold">Manajemen Kamar</h2>
+            <h2 class="text-3xl font-extrabold">
+                <span class="text-red-500">Manajemen </span> Kamar</h2>
             <a href="<?= base_url('admin/kamar/create') ?>" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
                 + Tambah Kamar
             </a>
@@ -38,10 +50,10 @@
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Foto</th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tipe Kamar</th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Harga/Malam</th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-500 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">Foto</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-500 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">Tipe Kamar</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-500 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">Harga/Malam</th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-500 text-left text-xs font-semibold text-gray-50 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>

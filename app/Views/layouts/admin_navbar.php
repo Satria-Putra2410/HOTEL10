@@ -52,10 +52,10 @@
                     </a>
                     </a>
                     <a href="<?= base_url('admin/dashboard') ?>" class="<?= $history_class ?> text-gray-300 hover:text-red-400 transition-colors flex items-center space-x-2">
-                        <i class='bx  bx-dashboard-alt'  ></i> 
+                        <i class='bx  bx-user'  ></i>  
                         <span>Dashboard</span>
                     </a>
-                    <a href="<?= base_url('logout') ?>" class="<?= $dashboard_class ?> text-gray-300 hover:text-red-400 transition-colors flex items-center space-x-2">
+                    <a href="<?= base_url('logout') ?>" class="<?= $dashboard_class ?> text-red-300 hover:text-red-600 transition-colors flex items-center space-x-2">
                         <i class='bx bx-chevrons-left'></i> 
                         <span>Logout</span>
                     </a>
