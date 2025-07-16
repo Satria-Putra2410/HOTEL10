@@ -10,40 +10,52 @@ class KamarModel extends Model
     protected $primaryKey       = 'id_kamar';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
+    protected $useSoftDeletes   = false;
 
+    // Pastikan semua nama kolom dari form Anda ada di sini.
     protected $allowedFields    = [
-        'harga_kamar',
         'tipe_kamar',
+        'harga_kamar',
         'jenis_ranjang',
         'jumlah_tamu',
-        'foto',
-        'deskripsi'
+        'deskripsi',
+        'foto'
     ];
 
-    // --- PERBAIKAN DI SINI ---
-    // Kita kembali menggunakan properti, bukan method, untuk menghindari error.
-    protected $validationRules = [
-        'tipe_kamar'    => 'required|min_length[5]',
-        'harga_kamar'   => 'required|numeric',
-        'jenis_ranjang' => 'required',
-        'jumlah_tamu'   => 'required|integer',
-        'deskripsi'     => 'required',
-        'foto'          => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png]'
-    ];
+    // Timestamps
+    protected $useTimestamps = false;
 
-    protected $validationMessages = [
+    // Aturan validasi untuk form
+    protected $validationRules      = [
+        'tipe_kamar'  => 'required|min_length[3]|max_length[100]',
+        'harga_kamar' => 'required|numeric|greater_than[0]',
+        'jumlah_tamu' => 'required|integer|greater_than[0]',
+        'deskripsi'   => 'required',
+        'foto'        => 'uploaded[foto]|max_size[foto,2048]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png,webp]',
+    ];
+    
+    // Pesan error kustom untuk validasi
+    protected $validationMessages   = [
         'tipe_kamar' => [
-            'required' => 'Tipe kamar wajib diisi.'
+            'required' => 'Tipe kamar wajib diisi.',
+            'min_length' => 'Tipe kamar minimal harus 3 karakter.'
         ],
         'harga_kamar' => [
-            'required' => 'Harga wajib diisi.',
-            'numeric'  => 'Harga harus berupa angka.'
+            'required' => 'Harga kamar wajib diisi.',
+            'numeric' => 'Harga kamar hanya boleh berisi angka.'
+        ],
+        'jumlah_tamu' => [
+            'required' => 'Kapasitas tamu wajib diisi.',
+            'integer' => 'Kapasitas tamu harus berupa angka bulat.'
+        ],
+        'deskripsi' => [
+            'required' => 'Deskripsi wajib diisi.'
         ],
         'foto' => [
-            'uploaded' => 'Anda harus memilih sebuah gambar untuk diunggah.',
-            'max_size' => 'Ukuran gambar maksimal adalah 2MB.',
-            'is_image' => 'File yang diunggah harus berupa gambar.',
-            'mime_in'  => 'Format gambar harus JPG, JPEG, atau PNG.'
+            'uploaded' => 'Anda wajib memilih sebuah foto kamar.',
+            'max_size' => 'Ukuran foto maksimal adalah 2 MB.',
+            'is_image' => 'File yang diupload harus berupa gambar.',
+            'mime_in'  => 'Format foto harus JPG, JPEG, PNG, atau WEBP.'
         ]
     ];
 }
