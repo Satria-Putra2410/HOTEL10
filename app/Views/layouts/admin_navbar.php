@@ -18,11 +18,11 @@
         }
 
     .nav-glass {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
-            color: #fff
-        }
+        background: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(220, 38, 38, 0.2);
+        color: #fff
+    }
 </style>
 
 <?php
@@ -32,42 +32,55 @@
     <nav class="nav-glass p-4 shadow-2xl sticky top-0 z-50">
         <div class="flex justify-between items-center max-w-7xl mx-auto">
             <h1 class="text-2xl font-bold tracking-widest text-shadow">
-                <span class="text-red-500">Admin</span> Panel
+                <a href="<?= base_url('admin/dashboard') ?>" class="text-white hover:text-red-500 transition-colors"><span class="text-red-500">Admin</span> Panel</a>
             </h1>
             <div class="flex items-center space-x-4">
                 <div class="hidden md:flex items-center space-x-6">
                 <?php
-                    $dashboard_class = ($uri->getSegment(2) == 'dashboard') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white';
-                    $history_class = ($uri->getSegment(2) == 'history') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white';
-                    $kamar_class = ($uri->getSegment(2) == 'kamar') ? 'bg-gray-700 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white';
+                    // Logika untuk menentukan class 'active' pada setiap link
+                    $base_class      = 'px-3 py-2 rounded-lg transition-colors flex items-center space-x-2';
+                    $active_class    = 'bg-red-600/50 text-white';
+                    $inactive_class  = 'text-gray-300 hover:bg-gray-700/50';
+
+                    $dashboard_class = ($uri->getSegment(2) == 'dashboard') ? $active_class : $inactive_class;
+                    $checkin_class   = ($uri->getSegment(2) == 'checkin') ? $active_class : $inactive_class;
+                    $kamar_class     = ($uri->getSegment(2) == 'kamar') ? $active_class : $inactive_class;
+                    $history_class   = ($uri->getSegment(2) == 'history') ? $active_class : $inactive_class;
                 ?>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="<?= base_url('admin/kamar') ?>" class="<?= $kamar_class ?> text-gray-300 hover:text-red-400 transition-colors flex items-center space-x-2">
+                <div class="hidden md:flex items-center space-x-2">
+                    <a href="<?= base_url('admin/dashboard') ?>" class="<?= $base_class ?> <?= $dashboard_class ?>">
+                        <i class='bx bx-grid-alt text-lg'></i>  
+                        <span>Dashboard</span>
+                    </a>
+                    
+                    <a href="<?= base_url('admin/checkin') ?>" class="<?= $base_class ?> <?= $checkin_class ?>">
+                        <i class='bx bx-log-in-circle text-lg'></i> <!-- PERBAIKAN: Ikon diubah -->
+                        <span>Check-In</span>
+                    </a>
+
+                    <a href="<?= base_url('admin/kamar') ?>" class="<?= $base_class ?> <?= $kamar_class ?>">
                         <i class='bx bx-bed text-lg'></i>
                         <span>Kamar</span>
                     </a>
-                    <a href="<?= base_url('admin/history') ?>" class="<?= $history_class ?> text-gray-300 hover:text-red-400 transition-colors flex items-center space-x-2">
-                        <i class='bx  bx-history'  ></i> 
+
+                    <a href="<?= base_url('admin/history') ?>" class="<?= $base_class ?> <?= $history_class ?>">
+                        <i class='bx bx-history text-lg'></i> 
                         <span>History</span>
                     </a>
-                    </a>
-                    <a href="<?= base_url('admin/dashboard') ?>" class="<?= $history_class ?> text-gray-300 hover:text-red-400 transition-colors flex items-center space-x-2">
-                        <i class='bx  bx-user'  ></i>  
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="<?= base_url('logout') ?>" class="<?= $dashboard_class ?> text-red-300 hover:text-red-600 transition-colors flex items-center space-x-2">
-                        <i class='bx bx-chevrons-left'></i> 
-                        <span>Logout</span>
-                    </a>
+                    <!-- PERBAIKAN: Tag <a> berlebih dihapus dari sini -->
                 </div>
 
             </div>
                 <div class="w-px h-6 bg-gray-600 hidden md:block"></div>
-                <div class="flex items-center space-x-2 text-gray-300">
-                    <i class='bx bx-user-circle text-2xl'></i>
-                    <span class="hidden sm:inline">Admin</span>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 text-gray-300">
+                        <i class='bx bx-user-circle text-2xl'></i>
+                        <span class="hidden sm:inline">Admin</span>
+                    </div>
+                     <a href="<?= base_url('logout') ?>" class="text-gray-300 hover:text-red-500 transition-colors flex items-center space-x-2" title="Logout">
+                        <i class='bx bx-log-out text-2xl'></i> 
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
-

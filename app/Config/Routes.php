@@ -29,26 +29,25 @@ $routes->get('logout', 'AuthController::logout');
 $routes->get('tamu_dashboard', 'TamuController::index', ['filter' => 'auth']);
 
 
-// == RUTE GRUP ADMIN (PERLU LOGIN & ROLE ADMIN) ==
-// Semua rute di dalam grup ini akan memiliki awalan 'admin/'
-// dan dilindungi oleh dua filter: 'auth' (harus login) & 'admin' (harus admin).
+// == RUTE GRUP ADMIN ==
+// Anda bisa mengaktifkan kembali filter dengan menambahkan ['filter' => ['auth', 'admin']]
 $routes->group('admin', function($routes) {
 
-    // URL: /admin/dashboard
+    // Rute Halaman Utama Admin
     $routes->get('dashboard', 'AdminController::index');
-
-    // URL: /admin/history
+    $routes->get('checkin', 'AdminController::checkinPage');
     $routes->get('history', 'AdminController::history');
 
-    // URL: /admin/reservasi/selesaikan/{id}
+    // Rute untuk Aksi Reservasi
+    $routes->get('reservasi/checkin/(:num)', 'AdminController::checkIn/$1');
     $routes->get('reservasi/selesaikan/(:num)', 'AdminController::selesaikanReservasi/$1');
 
-    // --- RUTE CRUD UNTUK MANAJEMEN KAMAR (CARA BENAR) ---
+    // Rute CRUD untuk Manajemen Kamar
     $routes->get('kamar', 'KamarController::index');
     $routes->get('kamar/create', 'KamarController::create');
-    $routes->post('kamar/store', 'KamarController::store'); // Memproses data dari form
+    $routes->post('kamar/store', 'KamarController::store');
     $routes->get('kamar/edit/(:num)', 'KamarController::edit/$1');
     $routes->post('kamar/update/(:num)', 'KamarController::update/$1');
     $routes->get('kamar/delete/(:num)', 'KamarController::delete/$1');
-
+    
 });

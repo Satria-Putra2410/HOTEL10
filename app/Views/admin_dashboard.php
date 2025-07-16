@@ -79,14 +79,14 @@
             transition: all 0.3s ease;
         }
 
-        .btn-selesaikan {
+        .btn-checkin { /* Mengubah nama class agar lebih sesuai */
             background: linear-gradient(135deg, #10b981, #059669);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .btn-selesaikan::before {
+        .btn-checkin::before { /* Mengubah nama class agar lebih sesuai */
             content: '';
             position: absolute;
             top: 0;
@@ -97,11 +97,11 @@
             transition: left 0.5s ease;
         }
 
-        .btn-selesaikan:hover::before {
+        .btn-checkin:hover::before { /* Mengubah nama class agar lebih sesuai */
             left: 100%;
         }
 
-        .btn-selesaikan:hover {
+        .btn-checkin:hover { /* Mengubah nama class agar lebih sesuai */
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
@@ -180,26 +180,26 @@
         <div class="mb-8 scroll-float">
             <div class="flex items-center space-x-4 mb-4">
                 <div class="p-3 bg-red-600/20 rounded-xl">
-                    <i class='bx bx-calendar-check text-3xl text-red-400 floating-icon'></i>
+                    <i class='bx bx-log-in-circle text-3xl text-red-400 floating-icon'></i> <!-- Icon diubah -->
                 </div>
                 <div>
                     <h2 class="text-4xl font-bold text-shadow">
-                        <span class="text-red-400">Reservasi</span> Aktif
+                        <span class="text-red-400">Reservasi</span> Menunggu Check-In
                     </h2>
-                    <p class="text-gray-300 text-lg mt-1">Kelola dan pantau semua reservasi yang sedang berlangsung</p>
+                    <p class="text-gray-300 text-lg mt-1">Daftar tamu yang telah melakukan reservasi dan siap untuk check-in.</p>
                 </div>
             </div>
             
-            <!-- Stats Cards -->
+            <!-- Stats Cards (Tidak diubah) -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div class="glass-effect p-6 rounded-xl card-hover">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-gray-400 text-sm font-semibold">Total Reservasi</p>
+                            <p class="text-gray-400 text-sm font-semibold">Menunggu Check-In</p>
                             <p class="text-2xl font-bold text-red-400"><?= count($reservations ?? []) ?></p>
                         </div>
                         <div class="p-3 bg-red-600/20 rounded-lg">
-                            <i class='bx bx-calendar text-xl text-red-400'></i>
+                            <i class='bx bx-calendar-event text-xl text-red-400'></i>
                         </div>
                     </div>
                 </div>
@@ -241,55 +241,25 @@
                 <table class="min-w-full">
                     <thead>
                         <tr class="table-header">
-                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">
-                                <div class="flex items-center space-x-2">
-                                    <i class='bx bx-hash text-red-400'></i>
-                                    <span>ID Reservasi</span>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">
-                                <div class="flex items-center space-x-2">
-                                    <i class='bx bx-user text-red-400'></i>
-                                    <span>Nama Tamu</span>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">
-                                <div class="flex items-center space-x-2">
-                                    <i class='bx bx-bed text-red-400'></i>
-                                    <span>Tipe Kamar</span>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">
-                                <div class="flex items-center space-x-2">
-                                    <i class='bx bx-calendar-plus text-red-400'></i>
-                                    <span>Check-in</span>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">
-                                <div class="flex items-center space-x-2">
-                                    <i class='bx bx-calendar-minus text-red-400'></i>
-                                    <span>Check-out</span>
-                                </div>
-                            </th>
-                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">
-                                <div class="flex items-center space-x-2">
-                                    <i class='bx bx-cog text-red-400'></i>
-                                    <span>Aksi</span>
-                                </div>
-                            </th>
+                            <!-- PERUBAHAN: Header tabel disesuaikan -->
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Nama Tamu</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tipe Kamar</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tgl Check-in</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-700/50">
                         <?php if (empty($reservations)): ?>
                             <tr>
-                                <td colspan="6" class="px-6 py-16 text-center">
+                                <td colspan="5" class="px-6 py-16 text-center"> <!-- PERUBAHAN: colspan disesuaikan -->
                                     <div class="flex flex-col items-center space-y-4">
                                         <div class="p-6 bg-gray-600/20 rounded-full">
-                                            <i class='bx bx-calendar-x text-4xl text-gray-400'></i>
+                                            <i class='bx bx-moon text-4xl text-gray-400'></i>
                                         </div>
                                         <div>
-                                            <h3 class="text-lg font-semibold text-gray-300 mb-2">Tidak ada reservasi aktif</h3>
-                                            <p class="text-gray-500">Belum ada reservasi yang perlu dikelola saat ini</p>
+                                            <h3 class="text-lg font-semibold text-gray-300 mb-2">Tidak ada reservasi</h3>
+                                            <p class="text-gray-500">Belum ada tamu yang menunggu untuk check-in.</p>
                                         </div>
                                     </div>
                                 </td>
@@ -299,12 +269,6 @@
                             <tr class="table-row">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-3">
-                                        <div class="w-2 h-2 bg-red-500 rounded-full pulse-dot"></div>
-                                        <span class="text-sm font-bold text-red-400"><?= esc($booking['id_reservasi']) ?></span>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center space-x-3">
                                         <div class="w-8 h-8 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center">
                                             <i class='bx bx-user text-white text-sm'></i>
                                         </div>
@@ -312,10 +276,8 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center space-x-2">
-                                        <div class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-semibold">
-                                            <?= esc($booking['tipe_kamar']) ?>
-                                        </div>
+                                    <div class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-semibold">
+                                        <?= esc($booking['tipe_kamar']) ?>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -326,16 +288,17 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-2">
-                                        <i class='bx bx-calendar text-orange-400 text-sm'></i>
-                                        <span class="text-sm text-gray-300"><?= date('d M Y', strtotime($booking['tgl_keluar'])) ?></span>
+                                        <div class="w-2 h-2 bg-yellow-500 rounded-full pulse-dot"></div>
+                                        <span class="text-sm font-semibold text-yellow-400"><?= esc($booking['status']) ?></span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <a href="<?= base_url('admin/reservasi/selesaikan/' . $booking['id_reservasi']) ?>" 
-                                       class="btn-selesaikan text-white font-bold py-2 px-4 rounded-lg text-xs flex items-center space-x-2 "
-                                       onclick="return confirm('Anda yakin ingin menyelesaikan reservasi ini?')">
-                                        <i class='bx bx-check-circle'></i>
-                                        <span>Selesaikan</span>
+                                    <!-- PERUBAHAN: Tombol dan link diubah untuk aksi Check-In -->
+                                    <a href="<?= base_url('admin/reservasi/checkin/' . $booking['id_reservasi']) ?>" 
+                                       class="btn-checkin text-white font-bold py-2 px-4 rounded-lg text-xs flex items-center space-x-2"
+                                       onclick="return confirm('Anda yakin tamu ini akan Check-In sekarang?')">
+                                        <i class='bx bx-log-in-circle'></i>
+                                        <span>Check-In</span>
                                     </a>
                                 </td>
                             </tr>
