@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tambah Kamar Baru</title>
+    <title><?= esc($title ?? 'Tambah Kamar Baru') ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans">
@@ -13,9 +13,10 @@
     <div class="container mx-auto mt-8 p-5">
         <h2 class="text-3xl font-extrabold mb-6">Tambah Kamar Baru</h2>
 
+        <!-- BLOK UNTUK MENAMPILKAN PESAN ERROR VALIDASI -->
         <?php if (session()->has('errors')): ?>
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg relative mb-4" role="alert">
-                <strong class="font-bold">Gagal menyimpan data!</strong>
+                <strong class="font-bold">Gagal menyimpan data! Silakan periksa error berikut:</strong>
                 <ul class="mt-2 list-disc list-inside">
                     <?php foreach (session('errors') as $error): ?>
                         <li><?= esc($error) ?></li>
@@ -25,7 +26,7 @@
         <?php endif; ?>
 
         <div class="bg-white p-8 rounded-lg shadow-md">
-            <form action="<?= base_url('admin/kamar/create') ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url('admin/kamar/store') ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Kolom Kiri -->
@@ -55,7 +56,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="foto" class="block text-gray-700 text-sm font-bold mb-2">Foto Kamar</label>
-                            <input type="file" name="foto" id="foto" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                            <input type="file" name="foto" id="foto" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
                 </div>

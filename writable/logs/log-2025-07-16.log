@@ -1,0 +1,347 @@
+DEBUG - 2025-07-16 13:55:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 13:56:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 13:57:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 13:57:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-07-16 13:57:06 --> mysqli_sql_exception: Unknown column 'drk.id_kamar' in 'on clause' in C:\xampp\htdocs\hotel10\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\hotel10\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `r`.`id_...', 0)
+#1 C:\xampp\htdocs\hotel10\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `r`.`id_...')
+#2 C:\xampp\htdocs\hotel10\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `r`.`id_...')
+#3 C:\xampp\htdocs\hotel10\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_...', Array, false)
+#4 C:\xampp\htdocs\hotel10\app\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\hotel10\app\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+#6 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(933): App\Controllers\AdminController->index()
+#7 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#8 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\hotel10\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\hotel10\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\hotel10\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-07-16 13:57:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'drk.id_kamar' in 'on clause'
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', [], false)
+ 2 APPPATH\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 13:57:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'drk.id_kamar' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', [], false)
+ 4 APPPATH\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 13:57:06 --> [Caused by] mysqli_sql_exception: Unknown column 'drk.id_kamar' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', [], false)
+ 5 APPPATH\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 13:59:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 13:59:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 13:59:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-07-16 13:59:49 --> mysqli_sql_exception: Unknown column 'drk.id_kamar' in 'on clause' in C:\xampp\htdocs\hotel10\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\hotel10\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `r`.`id_...', 0)
+#1 C:\xampp\htdocs\hotel10\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `r`.`id_...')
+#2 C:\xampp\htdocs\hotel10\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `r`.`id_...')
+#3 C:\xampp\htdocs\hotel10\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_...', Array, false)
+#4 C:\xampp\htdocs\hotel10\app\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\hotel10\app\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+#6 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(933): App\Controllers\AdminController->index()
+#7 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+#8 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\xampp\htdocs\hotel10\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\xampp\htdocs\hotel10\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\xampp\htdocs\hotel10\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+CRITICAL - 2025-07-16 13:59:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'drk.id_kamar' in 'on clause'
+[Method: GET, Route: admin/dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', [], false)
+ 2 APPPATH\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->index()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 13:59:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'drk.id_kamar' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', [], false)
+ 4 APPPATH\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 13:59:49 --> [Caused by] mysqli_sql_exception: Unknown column 'drk.id_kamar' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `r`.`id_reservasi`, `r`.`tgl_masuk`, `r`.`tgl_keluar`, `t`.`nama_tamu`, `k`.`tipe_kamar`, `p`.`id_pembayaran`
+FROM `reservasi` `r`
+JOIN `tamu` `t` ON `t`.`id_tamu` = `r`.`id_tamu`
+LEFT JOIN `detail_reservasi_kamar` `drk` ON `drk`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `kamar` `k` ON `k`.`id_kamar` = `drk`.`id_kamar`
+LEFT JOIN `pembayaran` `p` ON `p`.`id_reservasi` = `r`.`id_reservasi`
+LEFT JOIN `riwayat` `rw` ON `rw`.`id_reservasi` = `r`.`id_reservasi`
+WHERE `rw`.`id_riwayat` IS NULL
+ORDER BY `r`.`tgl_masuk` ASC', [], false)
+ 5 APPPATH\Models\ReservasiModel.php(33): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Controllers\AdminController.php(16): App\Models\ReservasiModel->getActiveReservations()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AdminController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 14:04:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:05:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:05:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:05:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:05:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:09:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:09:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:10:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:12:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:12:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:12:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:15:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 14:17:25 --> ParseError: syntax error, unexpected token "`"
+[Method: POST, Route: admin/kamar/store]
+in APPPATH\Config\Routes.php on line 62.
+ 1 SYSTEMPATH\CodeIgniter.php(821): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 2 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 14:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:17:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:17:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:17:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:18:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:19:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:19:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:20:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:20:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:20:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:23:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 14:23:01 --> ParseError: syntax error, unexpected token "`"
+[Method: GET, Route: admin/kamar/create]
+in APPPATH\Controllers\KamarController.php on line 169.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\KamarController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\KamarController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\KamarController')
+ 4 SYSTEMPATH\CodeIgniter.php(885): class_exists('\\App\\Controllers\\KamarController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 14:23:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:24:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:24:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:24:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:25:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:25:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:25:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 14:27:56 --> ParseError: Unmatched '}'
+[Method: GET, Route: admin/kamar/create]
+in APPPATH\Config\Routes.php on line 55.
+ 1 SYSTEMPATH\CodeIgniter.php(821): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 2 SYSTEMPATH\CodeIgniter.php(455): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 14:28:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:28:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:28:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:29:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:29:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:29:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:31:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:32:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:32:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:32:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:45:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:45:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:46:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:46:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:46:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:46:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:47:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:47:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:49:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:50:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:51:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:51:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:52:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:52:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:52:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:52:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:54:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:54:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:54:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:55:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:56:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:57:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:57:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 14:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
