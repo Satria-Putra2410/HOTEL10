@@ -6,6 +6,12 @@
     <title>Hotel 10 Bandung</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
+
+    body {
+      font-family: 'Lato', sans-serif;
+    }
+
         .bgbandung {
         background-image: url('assets/ciwidey.jpg');
         background-size: cover;
@@ -96,9 +102,9 @@
     </section>
 
     <!-- Section ARTIKEL -->
-     <article class="h-screen bg-gray-900 text-white py-10 px-6">
+     <article class="h-screen bg-gray-900 text-white py-10 px-6" style="font-family: 'lato',sans-serif;">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold mb-4 text-center">Pesona Alam Ciwidey</h2>
+            <h2 class="text-3xl font-bold mb-4 text-center text-red-500">Pesona Alam Ciwidey</h2>
             <p class="text-lg leading-relaxed mb-4">
             Ciwidey adalah kawasan wisata alam yang terletak di selatan Kota Bandung dan dikenal dengan keindahan alam pegunungan yang menakjubkan. Udara yang sejuk, hamparan kebun teh, serta pemandangan hijau yang memanjakan mata menjadikan Ciwidey sebagai destinasi favorit wisatawan lokal maupun mancanegara.
             </p>

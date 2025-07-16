@@ -6,6 +6,11 @@
     <title>Hotel 10 Bandung</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
+
+    body {
+      font-family: 'Lato', sans-serif;
+    }
       .bgbandung {
         background-image: url('assets/cukul.jpg');
         background-size: cover;
