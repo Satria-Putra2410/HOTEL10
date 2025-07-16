@@ -168,7 +168,7 @@
     <!-- Navbar -->
     <nav class="absolute w-full flex items-center justify-between px-6 py-4 z-50">
       <h1 class="text-2xl font-bold tracking-widest text-shadow">
-        <span class="text-red-500">Hotel</span> Sepuluh
+        <span class="text-red-500 font-semibold">Hotel</span> Sepuluh
       </h1>
         <div class="lg:flex gap-4">
             <a class="btn-link" href="<?= base_url('login') ?>">
@@ -184,7 +184,7 @@
         <div class="hero-overlay"></div>
         <div class="text-center position-relative">
             <h1 class="text-4xl select-none font-bold">Hotel Sepuluh Bandung</h1>
-            <p class="text-xl text-red-400 select-none ">A sanctuary of calm and luxury in Bandung</p>
+            <p class="text-xl text-red-500 select-none ">A sanctuary of calm and luxury in Bandung</p>
         </div>
     </section>
 <!-- Intro & Cards -->
