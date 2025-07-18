@@ -33,7 +33,7 @@
         </div>
 
         <div class="glass-effect rounded-2xl overflow-hidden shadow-2xl">
-            <div class="overflow-x-auto">
+            <div class="overflow-x-hidden">
                 <table class="min-w-full">
                     <thead>
                         <tr class="border-b border-gray-700/50">
@@ -64,7 +64,7 @@
                                     Rp <?= number_format($history['total_harga_reservasi'], 0, ',', '.') ?>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-3 py-1 bg-gray-600/50 text-gray-300 rounded-full text-xs font-semibold">
+                                    <span class="px-3 py-1 bg-green-300 text-gray-900 rounded-full text-xs font-semibold">
                                         <?= esc($history['status']) ?>
                                     </span>
                                 </td>
