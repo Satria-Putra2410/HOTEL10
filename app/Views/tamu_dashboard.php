@@ -163,39 +163,6 @@
             background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
             border-radius: 50%;
         }
-
-        .table-row:hover {
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(55, 65, 81, 0.05) 100%);
-            transform: translateX(5px);
-            transition: all 0.3s ease;
-        }
-
-        .book-btn {
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .book-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .book-btn:hover::before {
-            left: 100%;
-        }
-
-        .book-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
-        }
     </style>
 </head>
 <body class="gradient-bg text-white min-h-screen">
@@ -207,9 +174,9 @@
             </h1>
             <div class="flex items-center space-x-4">
                 <div class="hidden md:block">
-                    <span class="mr-4 welcome-text font-semibold">Selamat Datang, <strong class="text-red-400">Tamu</strong>!</span>
+                    <span class="mr-4 welcome-text font-semibold">Selamat Datang, <strong class="text-red-400"><?= session()->get('nama') ?></strong>!</span>
                 </div>
-                <a href="#" class="btn-logout text-white font-bold py-2 px-6 rounded-lg shadow-lg">
+                <a href="<?= base_url('logout') ?>" class="btn-logout text-white font-bold py-2 px-6 rounded-lg shadow-lg">
                     <span class="flex items-center space-x-2">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
@@ -221,7 +188,7 @@
         </div>
     </nav>
 
-    <section class="relative h-[50vh] bg-cover bg-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+    <section class="relative h-[50vh] bg-cover bg-center overflow-hidden" style="background-image: url('<?= base_url("assets/bandung.png") ?>');">
         <div class="absolute inset-0 hero-overlay"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"></div>
         
@@ -238,6 +205,8 @@
                     <span class="text-red-400">Tamu</span>
                 </h2>
                 <p class="text-xl md:text-2xl text-shadow opacity-90">Kelola reservasi dan informasi Anda dengan mudah</p>
+                <div class="mt-8">
+                </div>
             </div>
         </div>
     </section>
@@ -289,7 +258,7 @@
                 </div>
             </a>
 
-            <a href="#" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
+            <a href="<?= base_url('tamu/riwayat-reservasi') ?>" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
                 <div class="flex items-center gap-6 mb-4">
                     <div class="p-4 bg-red-600/20 rounded-2xl group-hover:bg-red-600/30 transition-all duration-300">
                         <svg class="w-10 h-10 fill-red-400 icon-glow floating-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="animation-delay: 0.5s;">
@@ -310,7 +279,7 @@
                 </div>
             </a>
 
-            <a href="#" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
+            <a href="<?= base_url('tamu/profil') ?>" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
                 <div class="flex items-center gap-6 mb-4">
                     <div class="p-4 bg-red-600/20 rounded-2xl group-hover:bg-red-600/30 transition-all duration-300">
                         <svg class="w-10 h-10 fill-red-400 icon-glow floating-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="animation-delay: 1s;">
@@ -333,7 +302,7 @@
         </div>
     </section>
 
-    <section id="booking-form-section" class="max-w-6xl mx-auto px-6 py-12">
+    <section id="booking-form-section" class="max-w-4xl mx-auto px-6 py-12">
         <h2 class="text-4xl font-bold text-center mb-8 scroll-float text-shadow">
             <span class="text-red-400">Pesan</span> Kamar
         </h2>
@@ -341,11 +310,11 @@
             <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="checkin_date" class="block text-gray-300 text-sm font-bold mb-2">Tanggal Check-in:</label>
-                    <input type="date" id="checkin_date" name="tgl_masuk" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                    <input type="date" id="checkin_date" name="tgl_masuk" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required min="<?= date('Y-m-d') ?>">
                 </div>
                 <div>
                     <label for="checkout_date" class="block text-gray-300 text-sm font-bold mb-2">Tanggal Check-out:</label>
-                    <input type="date" id="checkout_date" name="tgl_keluar" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                    <input type="date" id="checkout_date" name="tgl_keluar" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>">
                 </div>
                 <div>
                     <label for="num_guests" class="block text-gray-300 text-sm font-bold mb-2">Jumlah Tamu:</label>
@@ -360,10 +329,10 @@
 
             <div id="searchResults" class="mt-8">
                 <h3 class="text-2xl font-bold text-red-400 mb-4">Hasil Pencarian Kamar:</h3>
-                <div id="roomList">
-                    <p class="text-gray-400 text-center">Silakan masukkan tanggal check-in, check-out, dan jumlah tamu untuk mencari kamar.</p>
+                <div id="roomList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <p class="text-gray-400 text-center md:col-span-2">Silakan masukkan tanggal check-in, check-out, dan jumlah tamu untuk mencari kamar.</p>
                 </div>
-                <p id="noRoomsFound" class="hidden text-gray-400 text-center mt-4">Tidak ada kamar tersedia untuk kriteria yang Anda pilih.</p>
+                <p id="noRoomsFound" class="hidden text-gray-400 text-center md:col-span-2 mt-4">Tidak ada kamar tersedia untuk kriteria yang Anda pilih.</p>
                 <div id="loadingIndicator" class="hidden text-center text-red-400 mt-4">
                     <svg class="animate-spin h-8 w-8 text-red-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -376,7 +345,7 @@
     </section>
 
     <section class="bg-gray-900 py-10">
-        <h1 class="text-center text-xl font-bold mb-4">TENTANG KAMI</h1>
+        <h1 class="text-center text-xl font-bold mb-4" >TENTANG KAMI</h1>
         <div class="flex flex-col lg:flex-row gap-4 px-4 max-w-7xl mx-auto">
             
             <div class="w-full lg:w-1/3 scroll-float bg-gray-900 text-red-400 p-6 rounded shadow">
@@ -390,21 +359,21 @@
                     </div>
 
                     <div class="bg-gray-900 p-2 rounded shadow">
-                        <div class="flex justify-center gap-9">
+                        <div class="flex justify-center gap-9 ">
                             <a href="https://instagram.com" target="_blank">
-                                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold text-sm hover:opacity-80 hover:animate-bounce">IG</div>
+                                <img src="<?= base_url('icon/Instagram_Glyph_Gradient.png') ?>" alt="Instagram" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://tiktok.com" target="_blank">
-                                <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-white font-bold text-sm hover:opacity-80 hover:animate-bounce">TT</div>
+                                <img src="<?= base_url('icon/TikTok-logo-RGB-Stacked-white.png') ?>" alt="TikTok" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://whatsapp.com" target="_blank">
-                                <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold text-sm hover:opacity-80 hover:animate-bounce">WA</div>
+                                <img src="<?= base_url('icon/Digital_Glyph_Green.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://x.com" target="_blank">
-                                <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-white font-bold text-sm hover:opacity-80 hover:animate-bounce">X</div>
+                                <img src="<?= base_url('icon/logo-white.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://facebook.com" target="_blank">
-                                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm hover:opacity-80 hover:animate-bounce">FB</div>
+                                <img src="<?= base_url('icon/Facebook_Logo_Primary.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                         </div>
                     </div>
@@ -412,15 +381,17 @@
                 </div>
             </div>
 
-            <div class="w-full lg:w-2/3 scroll-float text-red-400 bg-gray-900 p-6 rounded shadow">
+
+            <div class="w-full lg:w-2/3 scroll-float text-red-400  bg-gray-900 p-6 rounded shadow">
                 <h2 class="text-xl font-bold text-center mb-4">Lokasi Kami</h2>
-                <div class="w-full h-64 rounded overflow-hidden bg-gray-800 flex items-center justify-center">
-                    <p class="text-gray-400">Map akan ditampilkan di sini</p>
+                <div class="w-full h-64 rounded overflow-hidden">
+                    <iframe class="h-full w-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.634749821576!2d107.61782427356557!3d-6.934183967873822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e88195d6aaab%3A0x792389b3a14079a1!2sHotel%20Sepuluh%20Buah%20Batu%20Bandung!5e0!3m2!1sen!2sid!4v1750495114135!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
         </div>
     </section>
+
 
     <footer class="bg-black/50 backdrop-blur-sm mt-20 py-8">
         <div class="max-w-7xl mx-auto px-6 text-center">
@@ -455,4 +426,146 @@
             tomorrow.setDate(tomorrow.getDate() + 1);
 
             const todayISO = today.toISOString().split('T')[0];
-            const tomorrowISO =
+            const tomorrowISO = tomorrow.toISOString().split('T')[0];
+            checkinDateInput.min = todayISO;
+            checkoutDateInput.min = tomorrowISO;
+
+            checkinDateInput.addEventListener('change', () => {
+                if (checkinDateInput.value) {
+                    const checkinDate = new Date(checkinDateInput.value);
+                    const minCheckoutDate = new Date(checkinDate);
+                    minCheckoutDate.setDate(minCheckoutDate.getDate() + 1);
+                    checkoutDateInput.min = minCheckoutDate.toISOString().split('T')[0];
+                    
+                    // If checkout date is before or same as new checkin date, reset it
+                    if (checkoutDateInput.value && new Date(checkoutDateInput.value) <= checkinDate) {
+                        checkoutDateInput.value = minCheckoutDate.toISOString().split('T')[0];
+                    }
+                } else {
+                    checkoutDateInput.min = tomorrowISO;
+                }
+            });
+
+
+            bookingForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                roomListDiv.innerHTML = ''; // Clear previous results
+                noRoomsFound.classList.add('hidden'); // Hide "no rooms found" message
+                loadingIndicator.classList.remove('hidden'); // Show loading indicator
+
+                const checkinDate = checkinDateInput.value;
+                const checkoutDate = checkoutDateInput.value;
+                const numGuests = document.getElementById('num_guests').value;
+
+                if (!checkinDate || !checkoutDate || !numGuests) {
+                    alert('Mohon lengkapi semua kolom tanggal dan jumlah tamu.');
+                    loadingIndicator.classList.add('hidden');
+                    return;
+                }
+
+                // Client-side date validation
+                if (new Date(checkinDate) >= new Date(checkoutDate)) {
+                    alert('Tanggal Check-out harus setelah Tanggal Check-in.');
+                    loadingIndicator.classList.add('hidden');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('<?= base_url('tamu/check-room-availability') ?>', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({
+                            tgl_masuk: checkinDate,
+                            tgl_keluar: checkoutDate,
+                            jumlah_tamu: numGuests
+                        })
+                    });
+
+                    const data = await response.json();
+                    loadingIndicator.classList.add('hidden'); // Hide loading indicator
+
+                    if (data.status === 'success' && data.rooms.length > 0) {
+                        data.rooms.forEach(room => {
+                            const roomCard = `
+                                <div class="glass-effect p-6 rounded-xl shadow-lg flex flex-col gap-4">
+                                    ${room.foto ? `<img src="<?= base_url('uploads/kamar/') ?>${room.foto}" alt="${room.tipe_kamar}" class="w-full h-48 object-cover rounded-lg mb-4">` : `<div class="w-full h-48 bg-gray-700 flex items-center justify-center rounded-lg mb-4 text-gray-400">Tidak ada foto</div>`}
+                                    <h4 class="text-xl font-bold text-red-300">${room.tipe_kamar} - Kamar No. ${room.nomor_kamar}</h4>
+                                    <p class="text-gray-300">Jenis Ranjang: ${room.jenis_ranjang}</p>
+                                    <p class="text-gray-300">Kapasitas: ${room.jumlah_tamu} Tamu</p>
+                                    <p class="text-gray-300">Deskripsi: ${room.deskripsi || 'Tidak ada deskripsi.'}</p>
+                                    <p class="text-2xl font-bold text-red-400 mt-auto">Rp ${parseFloat(room.harga_kamar).toLocaleString('id-ID')}</p>
+                                    <button class="book-room-btn w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+                                            data-id-unit-kamar="${room.id_unit_kamar}"
+                                            data-harga-kamar="${room.harga_kamar}"
+                                            data-tipe-kamar="${room.tipe_kamar}"
+                                            data-nomor-kamar="${room.nomor_kamar}">
+                                        Pesan Kamar Ini
+                                    </button>
+                                </div>
+                            `;
+                            roomListDiv.insertAdjacentHTML('beforeend', roomCard);
+                        });
+
+                        // Add event listeners for booking buttons
+                        document.querySelectorAll('.book-room-btn').forEach(button => {
+                            button.addEventListener('click', async (event) => {
+                                const idUnitKamar = event.target.dataset.idUnitKamar;
+                                const hargaKamar = parseFloat(event.target.dataset.hargaKamar);
+                                const tipeKamar = event.target.dataset.tipeKamar;
+                                const nomorKamar = event.target.dataset.nomorKamar;
+
+                                if (!confirm(`Anda yakin ingin memesan kamar ${tipeKamar} No. ${nomorKamar} dari ${checkinDate} sampai ${checkoutDate}?`)) {
+                                    return;
+                                }
+
+                                try {
+                                    const reservationResponse = await fetch('<?= base_url('tamu/create-reservation') ?>', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'X-Requested-With': 'XMLHttpRequest'
+                                        },
+                                        body: JSON.stringify({
+                                            id_unit_kamar: idUnitKamar,
+                                            tgl_masuk: checkinDate,
+                                            tgl_keluar: checkoutDate,
+                                            harga_kamar: hargaKamar // Pass harga_kamar for total price calculation in backend
+                                        })
+                                    });
+
+                                    const reservationData = await reservationResponse.json();
+
+                                    if (reservationData.status === 'success') {
+                                        alert('Pemesanan berhasil! ID Reservasi Anda: ' + reservationData.id_reservasi);
+                                        // Optional: Redirect to reservation history or clear form
+                                        window.location.reload(); // Reload dashboard to reflect changes
+                                    } else {
+                                        alert('Pemesanan gagal: ' + reservationData.message);
+                                    }
+
+                                } catch (error) {
+                                    console.error('Error during reservation:', error);
+                                    alert('Terjadi kesalahan saat memesan kamar.');
+                                }
+                            });
+                        });
+
+                    } else {
+                        noRoomsFound.classList.remove('hidden'); // Show "no rooms found"
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching room availability:', error);
+                    loadingIndicator.classList.add('hidden');
+                    roomListDiv.innerHTML = '<p class="text-red-500 text-center md:col-span-2">Terjadi kesalahan saat mencari kamar. Silakan coba lagi.</p>';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
