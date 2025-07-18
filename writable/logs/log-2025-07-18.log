@@ -228,3 +228,249 @@ DEBUG - 2025-07-18 09:06:32 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-07-18 09:06:41 --> Login failed for email: satria@mail.com. Invalid credentials.
 DEBUG - 2025-07-18 09:06:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-07-18 09:06:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:30:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:31:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:31:03 --> Admin login successful for email: man@mail.com
+DEBUG - 2025-07-18 09:31:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:31:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:31:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:31:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:36:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:36:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:36:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:36:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:37:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:38:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:38:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:38:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:39:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:39:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:39:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:39:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:39:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:41:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:41:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-07-18 09:41:51 --> mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dbhotel10`.`unit_kamar`, CONSTRAINT `unit_kamar_ibfk_1` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`)) in C:\xampp\htdocs\hotel10\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\hotel10\system\Database\MySQLi\Connection.php(327): mysqli->query('DELETE FROM `ka...', 0)
+#1 C:\xampp\htdocs\hotel10\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `ka...')
+#2 C:\xampp\htdocs\hotel10\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `ka...')
+#3 C:\xampp\htdocs\hotel10\system\Database\BaseBuilder.php(2848): CodeIgniter\Database\BaseConnection->query('DELETE FROM `ka...', Array, false)
+#4 C:\xampp\htdocs\hotel10\system\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+#5 C:\xampp\htdocs\hotel10\system\BaseModel.php(1161): CodeIgniter\Model->doDelete(Array, false)
+#6 C:\xampp\htdocs\hotel10\app\Controllers\KamarController.php(184): CodeIgniter\BaseModel->delete(Array)
+#7 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(933): App\Controllers\KamarController->delete('3')
+#8 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\KamarController))
+#9 C:\xampp\htdocs\hotel10\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\hotel10\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\hotel10\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\hotel10\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2025-07-18 09:41:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Cannot delete or update a parent row: a foreign key constraint fails (`dbhotel10`.`unit_kamar`, CONSTRAINT `unit_kamar_ibfk_1` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`))
+[Method: GET, Route: admin/kamar/delete/3]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2848): CodeIgniter\Database\BaseConnection->query('DELETE FROM `kamar`
+WHERE `id_kamar` IN :id_kamar:', [...], false)
+ 2 SYSTEMPATH\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+ 3 SYSTEMPATH\BaseModel.php(1161): CodeIgniter\Model->doDelete([...], false)
+ 4 APPPATH\Controllers\KamarController.php(184): CodeIgniter\BaseModel->delete([...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\KamarController->delete('3')
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\KamarController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-18 09:41:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Cannot delete or update a parent row: a foreign key constraint fails (`dbhotel10`.`unit_kamar`, CONSTRAINT `unit_kamar_ibfk_1` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `kamar`
+WHERE `id_kamar` IN (\'3\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `kamar`
+WHERE `id_kamar` IN (\'3\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2848): CodeIgniter\Database\BaseConnection->query('DELETE FROM `kamar`
+WHERE `id_kamar` IN :id_kamar:', [...], false)
+ 4 SYSTEMPATH\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+ 5 SYSTEMPATH\BaseModel.php(1161): CodeIgniter\Model->doDelete([...], false)
+ 6 APPPATH\Controllers\KamarController.php(184): CodeIgniter\BaseModel->delete([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\KamarController->delete('3')
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\KamarController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-18 09:41:51 --> [Caused by] mysqli_sql_exception: Cannot delete or update a parent row: a foreign key constraint fails (`dbhotel10`.`unit_kamar`, CONSTRAINT `unit_kamar_ibfk_1` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id_kamar`))
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('DELETE FROM `kamar`
+WHERE `id_kamar` IN (\'3\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('DELETE FROM `kamar`
+WHERE `id_kamar` IN (\'3\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('DELETE FROM `kamar`
+WHERE `id_kamar` IN (\'3\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2848): CodeIgniter\Database\BaseConnection->query('DELETE FROM `kamar`
+WHERE `id_kamar` IN :id_kamar:', [...], false)
+ 5 SYSTEMPATH\Model.php(521): CodeIgniter\Database\BaseBuilder->delete()
+ 6 SYSTEMPATH\BaseModel.php(1161): CodeIgniter\Model->doDelete([...], false)
+ 7 APPPATH\Controllers\KamarController.php(184): CodeIgniter\BaseModel->delete([...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\KamarController->delete('3')
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\KamarController))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-18 09:42:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:42:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:42:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:42:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:42:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:42:57 --> User logged out. Session destroyed.
+DEBUG - 2025-07-18 09:42:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:42:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:16 --> Login failed for email: g@mail.com. Invalid credentials.
+DEBUG - 2025-07-18 09:43:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:20 --> Login failed for email: g@mail.com. Invalid credentials.
+DEBUG - 2025-07-18 09:43:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:43 --> Tamu login successful for email: g@mail.com. Session data set: {"__ci_last_regenerate":1752831777,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id_tamu":"4","nama":"satriaz","email":"g@mail.com","isLoggedIn":true,"role":"tamu"}
+DEBUG - 2025-07-18 09:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:43 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:43:43 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:43 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:43 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:43 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:43:43 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:43:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:53 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:53 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:54 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:54 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:43:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:43:55 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:43:55 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:43:55 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:43:55 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:43:55 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:43:55 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:43:55 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:43:55 --> TamuController: checkRoomAvailability - Found rooms: 0
+DEBUG - 2025-07-18 09:47:09 --> User logged out. Session destroyed.
+DEBUG - 2025-07-18 09:47:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:23 --> Tamu login successful for email: satria@mail.com. Session data set: {"__ci_last_regenerate":1752832030,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id_tamu":"5","nama":"satria ","email":"satria@mail.com","isLoggedIn":true,"role":"tamu"}
+DEBUG - 2025-07-18 09:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:23 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:47:23 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:47:23 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:47:23 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:47:23 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:47:23 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:47:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:32 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:47:32 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:47:32 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:47:32 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:47:32 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:47:32 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-26","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:47:32 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:47:32 --> TamuController: checkRoomAvailability - Found rooms: 6
+DEBUG - 2025-07-18 09:47:34 --> User logged out. Session destroyed.
+DEBUG - 2025-07-18 09:47:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:41 --> Admin login successful for email: man@mail.com
+DEBUG - 2025-07-18 09:47:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:47:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:48:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

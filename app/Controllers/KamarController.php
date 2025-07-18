@@ -33,6 +33,7 @@ class KamarController extends BaseController
     }
 
     /**
+     * Menyimpan data kamar baru ke database.
      * KODE PRODUKSI FINAL
      */
     public function store()
@@ -52,12 +53,12 @@ class KamarController extends BaseController
 
         // 3. Siapkan Data
         $data = [
-            'tipe_kamar'  => $this->request->getPost('tipe_kamar'),
-            'harga_kamar' => $this->request->getPost('harga_kamar'),
+            'tipe_kamar'    => $this->request->getPost('tipe_kamar'),
+            'harga_kamar'   => $this->request->getPost('harga_kamar'),
             'jenis_ranjang' => $this->request->getPost('jenis_ranjang'),
-            'jumlah_tamu' => $this->request->getPost('jumlah_tamu'),
-            'deskripsi'   => $this->request->getPost('deskripsi'),
-            'foto'        => $namaFoto,
+            'jumlah_tamu'   => $this->request->getPost('jumlah_tamu'),
+            'deskripsi'     => $this->request->getPost('deskripsi'),
+            'foto'          => $namaFoto,
         ];
 
         // 4. Simpan ke Database, lewati validasi Model
@@ -72,6 +73,31 @@ class KamarController extends BaseController
         }
     }
 
+    /**
+     * Menampilkan detail satu kamar berdasarkan ID.
+     * Ini adalah method 'show' yang hilang dan menyebabkan error 404.
+     */
+    public function show($id)
+    {
+        $kamarModel = new KamarModel();
+        $room = $kamarModel->find($id);
+
+        if (!$room) {
+            // Jika kamar tidak ditemukan, lemparkan PageNotFoundException
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Kamar dengan ID ' . $id . ' tidak ditemukan.');
+        }
+
+        $data = [
+            'title' => 'Detail Kamar',
+            'room'  => $room,
+        ];
+        // Anda perlu membuat file view ini di 'app/Views/kamar/show.php'
+        return view('kamar/show', $data);
+    }
+
+    /**
+     * Menampilkan form untuk mengedit kamar yang sudah ada.
+     */
     public function edit($id)
     {
         $kamarModel = new KamarModel();
@@ -88,25 +114,48 @@ class KamarController extends BaseController
         return view('kamar/edit', $data);
     }
 
+    /**
+     * Memperbarui data kamar di database.
+     */
     public function update($id)
     {
         $kamarModel = new KamarModel();
         
         $rules = $kamarModel->getValidationRules();
 
+        // Jika ada file foto baru diupload, tambahkan aturan validasi foto
+        if ($this->request->getFile('foto') && $this->request->getFile('foto')->isValid() && !$this->request->getFile('foto')->hasMoved()) {
+            $rules['foto'] = 'uploaded[foto]|max_size[foto,2048]|is_image[foto]|mime_in[foto,image/jpg,image/jpeg,image/png,webp]';
+        } else {
+            // Jika tidak ada foto baru, hapus aturan 'uploaded' dari validasi
+            unset($rules['foto']);
+        }
+
+
         if (!$this->validate($rules)) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        // LOGIKA PROSES FOTO DIHAPUS
-
         $data = [
-            'tipe_kamar'  => $this->request->getPost('tipe_kamar'),
-            'harga_kamar' => $this->request->getPost('harga_kamar'),
+            'tipe_kamar'    => $this->request->getPost('tipe_kamar'),
+            'harga_kamar'   => $this->request->getPost('harga_kamar'),
             'jenis_ranjang' => $this->request->getPost('jenis_ranjang'),
-            'jumlah_tamu' => $this->request->getPost('jumlah_tamu'),
-            'deskripsi'   => $this->request->getPost('deskripsi'),
+            'jumlah_tamu'   => $this->request->getPost('jumlah_tamu'),
+            'deskripsi'     => $this->request->getPost('deskripsi'),
         ];
+
+        // Proses upload foto baru jika ada
+        $foto = $this->request->getFile('foto');
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            $oldRoom = $kamarModel->find($id);
+            // Hapus foto lama jika ada
+            if ($oldRoom && $oldRoom['foto'] && file_exists('uploads/kamar/' . $oldRoom['foto'])) {
+                unlink('uploads/kamar/' . $oldRoom['foto']);
+            }
+            $namaFoto = $foto->getRandomName();
+            $foto->move('uploads/kamar/', $namaFoto);
+            $data['foto'] = $namaFoto; // Tambahkan nama foto baru ke data update
+        }
 
         if ($kamarModel->update($id, $data)) {
             return redirect()->to('/admin/kamar')->with('success', 'Data kamar berhasil diperbarui.');
@@ -115,19 +164,28 @@ class KamarController extends BaseController
         }
     }
 
+    /**
+     * Menghapus data kamar dari database.
+     */
     public function delete($id)
     {
         $kamarModel = new KamarModel();
         $detailReservasiModel = new DetailReservasiKamarModel();
 
+        // Cek apakah kamar digunakan dalam reservasi
         $isUsed = $detailReservasiModel->where('id_kamar', $id)->first();
         if ($isUsed) {
             return redirect()->to('/admin/kamar')->with('error', 'Gagal! Kamar ini tidak dapat dihapus karena memiliki riwayat reservasi.');
         }
 
-        // LOGIKA HAPUS FOTO DIHAPUS
-        
+        // Ambil data kamar sebelum dihapus untuk mendapatkan nama foto
+        $room = $kamarModel->find($id);
+
         if ($kamarModel->delete($id)) {
+            // Hapus file foto terkait jika ada
+            if ($room && $room['foto'] && file_exists('uploads/kamar/' . $room['foto'])) {
+                unlink('uploads/kamar/' . $room['foto']);
+            }
             return redirect()->to('/admin/kamar')->with('success', 'Data kamar berhasil dihapus.');
         } else {
             return redirect()->to('/admin/kamar')->with('error', 'Gagal menghapus data kamar.');
