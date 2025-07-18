@@ -13,28 +13,31 @@ class ReservasiModel extends Model
     protected $useSoftDeletes   = false;
 
     /**
-     * PERBAIKAN: Kolom 'status' ditambahkan ke daftar izin.
-     * Ini akan memperbaiki error "There is no data to update".
+     * Kolom-kolom yang diizinkan untuk diisi (fillable fields).
+     * Ini mencakup semua kolom yang relevan untuk proses reservasi dan update status.
      */
     protected $allowedFields    = [
         'tgl_masuk',
         'tgl_keluar',
         'total_harga_reservasi',
         'id_tamu',
-        'status' // <-- INI ADALAH PERBAIKANNYA
+        'status' // Kolom 'status' sangat penting untuk perubahan status reservasi.
     ];
 
-    // Timestamps
+    // Timestamps (saat ini tidak digunakan, sesuai konfigurasi Anda)
     protected $useTimestamps = false;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
-    // Anda bisa menambahkan aturan validasi di sini jika diperlukan nanti
+    // Aturan validasi (saat ini kosong, Anda bisa menambahkannya jika diperlukan)
     protected $validationRules      = [];
     protected $validationMessages   = [];
     protected $skipValidation       = false;
 
     /**
-     * Fungsi kustom dari model Anda sebelumnya tetap dipertahankan
-     * untuk mengambil reservasi aktif yang belum masuk riwayat.
+     * Fungsi kustom untuk mengambil reservasi aktif yang belum masuk ke riwayat.
+     * Fungsi ini dipertahankan sesuai dengan struktur yang Anda berikan.
      */
     public function getActiveReservations()
     {

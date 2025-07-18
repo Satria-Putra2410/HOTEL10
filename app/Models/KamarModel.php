@@ -6,11 +6,13 @@ use CodeIgniter\Model;
 
 class KamarModel extends Model
 {
-    protected $table            = 'kamar';
-    protected $primaryKey       = 'id_kamar';
+    protected $table      = 'kamar';
+    protected $primaryKey = 'id_kamar';
+
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
+
+    protected $returnType     = 'array';
+    protected $useSoftDeletes = false;
 
     // Pastikan semua nama kolom dari form Anda ada di sini.
     protected $allowedFields    = [
@@ -24,6 +26,9 @@ class KamarModel extends Model
 
     // Timestamps
     protected $useTimestamps = false;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
+    protected $deletedField  = 'deleted_at';
 
     // Aturan validasi untuk form
     protected $validationRules      = [
@@ -58,4 +63,5 @@ class KamarModel extends Model
             'mime_in'  => 'Format foto harus JPG, JPEG, PNG, atau WEBP.'
         ]
     ];
+    protected $skipValidation     = false;
 }
