@@ -139,3 +139,92 @@ DEBUG - 2025-07-18 08:50:22 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-07-18 08:50:36 --> Login failed for email: satria@mail.com. Invalid credentials.
 DEBUG - 2025-07-18 08:50:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-07-18 08:50:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:00:19 --> Login failed for email: satria@mail.com. Invalid credentials.
+DEBUG - 2025-07-18 09:00:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:00:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:02:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:02:06 --> Tamu login successful for email: satria@mail.com. Session data set: {"__ci_last_regenerate":1752829219,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id_tamu":"5","nama":"satria ","email":"satria@mail.com","isLoggedIn":true,"role":"tamu"}
+DEBUG - 2025-07-18 09:02:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:02:06 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:02:06 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:02:06 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:02:06 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:02:07 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:02:07 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:02:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:02:33 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:02:33 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:02:33 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:02:33 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:02:33 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:02:33 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:03:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:03:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:03:20 --> Tamu login successful for email: satria@mail.com. Session data set: {"__ci_last_regenerate":1752829389,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id":"3","nama":"satria ","email":"satria@mail.com","isLoggedIn":true,"role":"tamu","id_tamu":"5"}
+DEBUG - 2025-07-18 09:03:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:03:20 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:03:20 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:03:20 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:03:20 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:03:20 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:03:20 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:03:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:03:55 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:03:55 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:03:55 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:03:55 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:03:55 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:03:55 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:04:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:04:15 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:04:15 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:04:15 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:04:15 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:04:15 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:04:15 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-19","tgl_keluar":"2025-07-23","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:04:15 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:04:15 --> TamuController: checkRoomAvailability - Found rooms: 6
+DEBUG - 2025-07-18 09:05:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:05:02 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:05:02 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:05:02 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:05:02 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:05:02 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:05:02 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:05:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:05:24 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-18 09:05:24 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:05:24 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:05:24 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:05:24 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-18 09:05:24 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-19","tgl_keluar":"2025-07-21","jumlah_tamu":"1"}
+DEBUG - 2025-07-18 09:05:24 --> TamuController: checkRoomAvailability - Reserved IDs: []
+DEBUG - 2025-07-18 09:05:24 --> TamuController: checkRoomAvailability - Found rooms: 6
+DEBUG - 2025-07-18 09:06:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:11 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/profil
+DEBUG - 2025-07-18 09:06:11 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:06:11 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:06:11 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:06:11 --> TamuController: editProfil method triggered.
+DEBUG - 2025-07-18 09:06:12 --> TamuController: Loading tamu_edit_profil view.
+DEBUG - 2025-07-18 09:06:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/profil
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:06:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Status login: true
+DEBUG - 2025-07-18 09:06:18 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-18 09:06:18 --> TamuController: index method triggered.
+DEBUG - 2025-07-18 09:06:18 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-18 09:06:21 --> User logged out. Session destroyed.
+DEBUG - 2025-07-18 09:06:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:31 --> Login failed for email: satria@mail.com. Invalid credentials.
+DEBUG - 2025-07-18 09:06:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:41 --> Login failed for email: satria@mail.com. Invalid credentials.
+DEBUG - 2025-07-18 09:06:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:06:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
