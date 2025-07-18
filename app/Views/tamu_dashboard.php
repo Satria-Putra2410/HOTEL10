@@ -279,7 +279,7 @@
                 </div>
             </a>
 
-            <a href="<?= base_url('tamu/edit-profil') ?>" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
+            <a href="<?= base_url('tamu/profil') ?>" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
                 <div class="flex items-center gap-6 mb-4">
                     <div class="p-4 bg-red-600/20 rounded-2xl group-hover:bg-red-600/30 transition-all duration-300">
                         <svg class="w-10 h-10 fill-red-400 icon-glow floating-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="animation-delay: 1s;">

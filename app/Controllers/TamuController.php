@@ -4,8 +4,9 @@ namespace App\Controllers;
 
 use App\Models\ReservasiModel;
 use App\Models\KamarModel;
-use App\Models\UnitKamarModel; // Perlu model ini
-use CodeIgniter\API\ResponseTrait; // Untuk respon JSON
+use App\Models\UnitKamarModel;
+use App\Models\TamuModel;
+use CodeIgniter\API\ResponseTrait;
 
 class TamuController extends BaseController
 {
@@ -14,12 +15,14 @@ class TamuController extends BaseController
     protected $reservasiModel;
     protected $kamarModel;
     protected $unitKamarModel;
+    protected $tamuModel;
 
     public function __construct()
     {
         $this->reservasiModel = new ReservasiModel();
         $this->kamarModel = new KamarModel();
         $this->unitKamarModel = new UnitKamarModel();
+        $this->tamuModel = new TamuModel();
         helper(['form', 'url', 'session']); // Pastikan helper session dimuat
     }
 
@@ -73,10 +76,10 @@ class TamuController extends BaseController
              return $this->failValidationError('Tanggal Check-in tidak boleh di masa lalu.');
         }
 
-
         // Logika Ketersediaan Kamar
         // 1. Dapatkan semua id_unit_kamar yang sudah terreservasi pada rentang tanggal tersebut
-        $reservedUnitIds = $this->db->table('reservasi r')
+        $db = \Config\Database::connect();
+        $reservedUnitIds = $db->table('reservasi r')
             ->select('drk.id_kamar as id_unit_kamar') // id_kamar di detail_reservasi_kamar sebenarnya merujuk ke id_unit_kamar
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
             ->where('r.status !=', 'selesai') // Jangan cek reservasi yang sudah selesai
@@ -139,8 +142,9 @@ class TamuController extends BaseController
             return $this->failValidationError('Data pemesanan tidak lengkap.');
         }
 
+        $db = \Config\Database::connect();
         // --- Logika Pencegahan Double Booking (Race Condition) ---
-        $isAvailable = $this->db->table('reservasi r')
+        $isAvailable = $db->table('reservasi r')
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
             ->where('drk.id_kamar', $id_unit_kamar) 
             ->where('r.status !=', 'selesai') 
@@ -170,7 +174,6 @@ class TamuController extends BaseController
         $total_harga_reservasi = $harga_kamar * $numberOfNights;
         log_message('debug', 'TamuController: createReservation - Total price: ' . $total_harga_reservasi . ' for ' . $numberOfNights . ' nights.');
 
-
         // Buat reservasi baru
         $reservasiData = [
             'tgl_masuk' => $tgl_masuk,
@@ -180,7 +183,7 @@ class TamuController extends BaseController
             'status' => 'Reserved' 
         ];
 
-        $this->db->transBegin(); 
+        $db->transBegin(); 
 
         try {
             $this->reservasiModel->insert($reservasiData);
@@ -192,14 +195,14 @@ class TamuController extends BaseController
                 'id_kamar' => $id_unit_kamar 
             ];
 
-            $this->db->table('detail_reservasi_kamar')->insert($detailReservasiKamarData);
+            $db->table('detail_reservasi_kamar')->insert($detailReservasiKamarData);
 
-            $this->db->transCommit(); 
+            $db->transCommit(); 
             log_message('debug', 'TamuController: createReservation - Reservation successful. ID: ' . $id_reservasi);
             return $this->respondCreated(['status' => 'success', 'message' => 'Pemesanan berhasil!', 'id_reservasi' => $id_reservasi]);
 
         } catch (\Exception $e) {
-            $this->db->transRollback(); 
+            $db->transRollback(); 
             log_message('error', 'TamuController: createReservation - Database transaction failed: ' . $e->getMessage());
             return $this->failServerError('Terjadi kesalahan saat memproses pemesanan: ' . $e->getMessage());
         }
@@ -209,7 +212,7 @@ class TamuController extends BaseController
     public function riwayatReservasi()
     {
         log_message('debug', 'TamuController: riwayatReservasi method triggered.');
-        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') { // Menggunakan 'isLoggedIn'
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
             log_message('debug', 'TamuController: riwayatReservasi - User not logged in or not tamu, redirecting to login.');
             return redirect()->to(base_url('login'));
         }
@@ -233,67 +236,70 @@ class TamuController extends BaseController
         return view('tamu_riwayat', $data); 
     }
 
-    // Metode untuk menampilkan form edit profil (Anda perlu membuat view ini)
+    /**
+     * Menampilkan halaman form untuk mengedit profil tamu.
+     */
     public function editProfil()
     {
         log_message('debug', 'TamuController: editProfil method triggered.');
-        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') { // Menggunakan 'isLoggedIn'
-            log_message('debug', 'TamuController: editProfil - User not logged in or not tamu, redirecting to login.');
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
             return redirect()->to(base_url('login'));
         }
 
         $id_tamu = session()->get('id_tamu');
-        $tamuModel = new \App\Models\TamuModel(); 
-        $data['tamu'] = $tamuModel->find($id_tamu);
-        $data['title'] = 'Edit Profil';
+        
+        // Menggunakan model yang sudah diinisialisasi di constructor
+        $userData = $this->tamuModel->find($id_tamu);
 
-        log_message('debug', 'TamuController: Loading tamu_edit_profil view.');
-        return view('tamu_edit_profil', $data); 
-    }
-
-    // Metode untuk mengupdate profil tamu (Anda perlu membuat view ini)
-    public function updateProfil()
-    {
-        log_message('debug', 'TamuController: updateProfil method triggered.');
-        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') { // Menggunakan 'isLoggedIn'
-            log_message('debug', 'TamuController: updateProfil - User not logged in or not tamu, redirecting to login.');
-            return redirect()->to(base_url('login'));
-        }
-
-        $id_tamu = session()->get('id_tamu');
-        $tamuModel = new \App\Models\TamuModel();
-
-        $rules = [
-            'nama_tamu' => 'required|min_length[3]|max_length[100]',
-            'no_hp_tamu' => 'required|numeric|min_length[10]|max_length[20]',
-            'email' => 'required|valid_email|is_unique[tamu.email,id_tamu,'.$id_tamu.']',
-            'password' => 'permit_empty|min_length[6]', 
-        ];
-
-        if (!$this->validate($rules)) {
-            log_message('error', 'TamuController: updateProfil - Validation failed: ' . json_encode($this->validator->getErrors()));
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        if (!$userData) {
+            session()->destroy();
+            return redirect()->to(base_url('login'))->with('error', 'Data pengguna tidak ditemukan.');
         }
 
         $data = [
-            'nama_tamu' => $this->request->getPost('nama_tamu'),
-            'no_hp_tamu' => $this->request->getPost('no_hp_tamu'),
-            'email' => $this->request->getPost('email'),
+            'title' => 'Edit Profil',
+            'tamu'  => $userData // Menggunakan 'tamu' agar konsisten dengan view Anda
         ];
 
-        if ($this->request->getPost('password')) {
-            $data['password'] = md5($this->request->getPost('password')); // Menggunakan md5()
+        log_message('debug', 'TamuController: Loading tamu_edit_profil view.');
+        // Ini akan memuat view app/Views/tamu_edit_profil.php
+        return view('tamu_edit_profil', $data);
+    }
+
+    /**
+     * Memproses data dari form edit profil dan mengupdate ke database.
+     */
+    public function updateProfil()
+    {
+        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
+            return redirect()->to(base_url('login'));
         }
 
-        if ($tamuModel->update($id_tamu, $data)) {
-            // Update session data if name or email changes
-            session()->set('nama', $data['nama_tamu']);
-            session()->set('email', $data['email']);
-            log_message('debug', 'TamuController: updateProfil - Profile updated successfully for ID: ' . $id_tamu);
-            return redirect()->to(base_url('tamu/dashboard'))->with('success', 'Profil berhasil diperbarui.');
+        $id_tamu = session()->get('id_tamu');
+
+        $dataToUpdate = [
+            'id_tamu'    => $id_tamu,
+            'nama_tamu'  => $this->request->getPost('nama_tamu'),
+            'no_hp_tamu' => $this->request->getPost('no_hp_tamu'),
+            'email'      => $this->request->getPost('email'),
+        ];
+
+        $password = $this->request->getPost('password');
+        if (!empty($password)) {
+            $dataToUpdate['password'] = $password;
         } else {
-            log_message('error', 'TamuController: updateProfil - Failed to update profile for ID: ' . $id_tamu);
-            return redirect()->back()->with('error', 'Gagal memperbarui profil.');
+            $this->tamuModel->validationRules['password'] = 'permit_empty|min_length[6]';
         }
+
+        if ($this->tamuModel->save($dataToUpdate) === false) {
+            return redirect()->back()->withInput()->with('errors', $this->tamuModel->errors());
+        }
+
+        session()->set([
+            'nama' => $dataToUpdate['nama_tamu'],
+            'email' => $dataToUpdate['email'],
+        ]);
+        
+        return redirect()->to(base_url('tamu/dashboard'))->with('success', 'Profil berhasil diperbarui.');
     }
 }
