@@ -25,29 +25,47 @@ $routes->post('register', 'AuthController::processRegister');
 $routes->get('logout', 'AuthController::logout');
 
 
-// == RUTE UNTUK TAMU (PERLU LOGIN) ==
-$routes->get('tamu_dashboard', 'TamuController::index', ['filter' => 'auth']);
+// Filter untuk pengguna yang sudah login (auth)
+// Semua rute di dalam grup ini akan memerlukan filter 'auth'
+$routes->group('/', ['filter' => 'auth'], function($routes) {
 
+    // == RUTE GRUP ADMIN ==
+    // Rute admin juga akan dilindungi oleh filter 'admin'
+    $routes->group('admin', ['filter' => 'admin'], function($routes) {
 
-// == RUTE GRUP ADMIN ==
-// Anda bisa mengaktifkan kembali filter dengan menambahkan ['filter' => ['auth', 'admin']]
-$routes->group('admin', function($routes) {
+        // Rute Halaman Utama Admin
+        $routes->get('dashboard', 'AdminController::index');
+        $routes->get('checkin', 'AdminController::checkinPage');
+        $routes->get('history', 'AdminController::history');
 
-    // Rute Halaman Utama Admin
-    $routes->get('dashboard', 'AdminController::index');
-    $routes->get('checkin', 'AdminController::checkinPage');
-    $routes->get('history', 'AdminController::history');
+        // Rute untuk Aksi Reservasi
+        // Dipertahankan sesuai nama yang umum digunakan di CodeIgniter
+        $routes->get('reservasi/check-in/(:num)', 'AdminController::checkIn/$1');
+        $routes->get('reservasi/selesaikan/(:num)', 'AdminController::selesaikanReservasi/$1');
 
-    // Rute untuk Aksi Reservasi
-    $routes->get('reservasi/checkin/(:num)', 'AdminController::checkIn/$1');
-    $routes->get('reservasi/selesaikan/(:num)', 'AdminController::selesaikanReservasi/$1');
+        // Rute CRUD untuk Manajemen Kamar
+        $routes->get('kamar', 'KamarController::index');
+        $routes->get('kamar/create', 'KamarController::create');
+        $routes->post('kamar/store', 'KamarController::store');
+        $routes->get('kamar/edit/(:num)', 'KamarController::edit/$1');
+        $routes->post('kamar/update/(:num)', 'KamarController::update/$1');
+        $routes->get('kamar/delete/(:num)', 'KamarController::delete/$1');
+        
+        // Tambahan: Rute CRUD untuk Manajemen Unit Kamar (jika ada)
+        $routes->get('unit-kamar', 'UnitKamarController::index');
+        $routes->post('unit-kamar/store', 'UnitKamarController::store');
+        $routes->post('unit-kamar/delete/(:num)', 'UnitKamarController::delete/$1');
+    });
 
-    // Rute CRUD untuk Manajemen Kamar
-    $routes->get('kamar', 'KamarController::index');
-    $routes->get('kamar/create', 'KamarController::create');
-    $routes->post('kamar/store', 'KamarController::store');
-    $routes->get('kamar/edit/(:num)', 'KamarController::edit/$1');
-    $routes->post('kamar/update/(:num)', 'KamarController::update/$1');
-    $routes->get('kamar/delete/(:num)', 'KamarController::delete/$1');
-    
+    // == RUTE UNTUK TAMU (PERLU LOGIN) ==
+    // Ini adalah perubahan utama untuk rute tamu
+    $routes->group('tamu', ['filter' => 'tamu'], function($routes) {
+        $routes->get('dashboard', 'TamuController::index'); // Rute dashboard tamu
+        $routes->post('check-room-availability', 'TamuController::checkRoomAvailability');
+        $routes->post('create-reservation', 'TamuController::createReservation');
+        $routes->get('riwayat-reservasi', 'TamuController::riwayatReservasi');
+        $routes->get('edit-profil', 'TamuController::editProfil');
+        $routes->post('update-profil', 'TamuController::updateProfil');
+    });
 });
+

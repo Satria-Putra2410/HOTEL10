@@ -715,3 +715,428 @@ DEBUG - 2025-07-16 17:48:57 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-07-16 17:49:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-07-16 17:49:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-07-16 17:49:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 17:57:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 17:58:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 17:58:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 17:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 17:58:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:30:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:30:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:30:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:30:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:30:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:31:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:33:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:33:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:33:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:36:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:36:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:36:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:36:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:36:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:38:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:38:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:38:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:38:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:38:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 18:44:11 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "auth/login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('auth/login.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('auth/login', [], true)
+ 3 APPPATH\Controllers\AuthController.php(28): view('auth/login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->login()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 18:44:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:44:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:45:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:45:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:45:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:45:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:45:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:45:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 18:49:12 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "auth/login.php"
+[Method: GET, Route: login]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(212): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('auth/login.php')
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('auth/login', [], true)
+ 3 APPPATH\Controllers\AuthController.php(28): view('auth/login', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AuthController->login()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 18:50:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:50:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:51:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 18:51:02 --> CodeIgniter\Filters\Exceptions\FilterException: "tamu" filter must have a matching alias defined.
+[Method: GET, Route: tamu/dashboard]
+in SYSTEMPATH\Filters\Filters.php on line 590.
+ 1 SYSTEMPATH\Filters\Filters.php(590): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('tamu')
+ 2 SYSTEMPATH\Filters\Filters.php(641): CodeIgniter\Filters\Filters->enableFilter('tamu', 'before')
+ 3 SYSTEMPATH\CodeIgniter.php(467): CodeIgniter\Filters\Filters->enableFilters([...], 'before')
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 18:52:38 --> CodeIgniter\Filters\Exceptions\FilterException: "tamu" filter must have a matching alias defined.
+[Method: GET, Route: tamu/dashboard]
+in SYSTEMPATH\Filters\Filters.php on line 590.
+ 1 SYSTEMPATH\Filters\Filters.php(590): CodeIgniter\Filters\Exceptions\FilterException::forNoAlias('tamu')
+ 2 SYSTEMPATH\Filters\Filters.php(641): CodeIgniter\Filters\Filters->enableFilter('tamu', 'before')
+ 3 SYSTEMPATH\CodeIgniter.php(467): CodeIgniter\Filters\Filters->enableFilters([...], 'before')
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-16 18:54:56 --> ErrorException: Cannot declare class Config\Filters, because the name is already in use
+[Method: GET, Route: tamu/dashboard]
+in APPPATH\Filters\AuthFilter.php on line 12.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+DEBUG - 2025-07-16 18:55:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-07-16 18:55:38 --> ErrorException: Namespace declaration statement has to be the very first statement or after any declare call in the script
+[Method: GET, Route: tamu/dashboard]
+in APPPATH\Filters\TamuFilter.php on line 4.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+DEBUG - 2025-07-16 18:56:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:56:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:58:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:58:52 --> Admin login successful for email: man@mail.com
+DEBUG - 2025-07-16 18:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:58:55 --> User logged out. Session destroyed.
+DEBUG - 2025-07-16 18:58:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:58:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:59:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:59:04 --> Tamu login successful for email: mt@mail.com. Session data set: {"__ci_last_regenerate":1752692335,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id_tamu":"4","nama":"mantamu","email":"mt@mail.com","isLoggedIn":true,"role":"tamu"}
+DEBUG - 2025-07-16 18:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 18:59:05 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-16 18:59:05 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 18:59:05 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 18:59:05 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 18:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:00:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:01 --> Admin login successful for email: man@mail.com
+DEBUG - 2025-07-16 19:01:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:04 --> User logged out. Session destroyed.
+DEBUG - 2025-07-16 19:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:07 --> Tamu login successful for email: mt@mail.com. Session data set: {"__ci_last_regenerate":1752692464,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id_tamu":"4","nama":"mantamu","email":"mt@mail.com","isLoggedIn":true,"role":"tamu"}
+DEBUG - 2025-07-16 19:01:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:07 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-16 19:01:07 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:01:07 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:01:07 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:01:07 --> TamuController: index method triggered.
+DEBUG - 2025-07-16 19:01:07 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-16 19:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:01:40 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-16 19:01:40 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:01:40 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:01:40 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:01:40 --> TamuController: index method triggered.
+DEBUG - 2025-07-16 19:01:40 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-16 19:02:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:02:31 --> Tamu login successful for email: mt@mail.com. Session data set: {"__ci_last_regenerate":1752692464,"_ci_previous_url":"http:\/\/localhost\/hotel10\/public\/index.php\/login","id_tamu":"4","nama":"mantamu","email":"mt@mail.com","isLoggedIn":true,"role":"tamu"}
+DEBUG - 2025-07-16 19:02:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:02:31 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/dashboard
+DEBUG - 2025-07-16 19:02:31 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:02:31 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:02:31 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:02:31 --> TamuController: index method triggered.
+DEBUG - 2025-07-16 19:02:31 --> TamuController: Attempting to load tamu_dashboard view.
+DEBUG - 2025-07-16 19:07:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:07:40 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:07:40 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:07:40 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:07:40 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:07:40 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:07:40 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-17","tgl_keluar":"2025-07-18","jumlah_tamu":"2"}
+CRITICAL - 2025-07-16 19:07:40 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:07:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:07:45 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:07:45 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:07:45 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:07:45 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:07:45 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:07:45 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-17","tgl_keluar":"2025-07-18","jumlah_tamu":"2"}
+CRITICAL - 2025-07-16 19:07:45 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:07:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:07:50 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:07:50 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:07:50 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:07:50 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:07:50 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:07:50 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-17","tgl_keluar":"2025-07-18","jumlah_tamu":"3"}
+CRITICAL - 2025-07-16 19:07:50 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:07:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:07:53 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:07:53 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:07:53 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:07:53 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:07:53 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:07:53 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-17","tgl_keluar":"2025-07-18","jumlah_tamu":"1"}
+CRITICAL - 2025-07-16 19:07:53 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:08:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:08:09 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:08:09 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:08:09 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:08:09 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:08:09 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:08:09 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"1"}
+CRITICAL - 2025-07-16 19:08:09 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:08:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:08:13 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:08:13 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:08:13 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:08:13 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:08:13 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:08:13 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"5"}
+CRITICAL - 2025-07-16 19:08:13 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:08:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:08:16 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:08:16 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:08:16 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:08:16 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:08:16 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:08:16 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-19","jumlah_tamu":"3"}
+CRITICAL - 2025-07-16 19:08:16 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:08:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:08:43 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:08:43 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:08:43 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:08:43 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:08:43 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:08:43 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"3"}
+CRITICAL - 2025-07-16 19:08:43 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:08:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:08:47 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:08:47 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:08:47 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:08:47 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:08:47 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:08:47 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"2"}
+CRITICAL - 2025-07-16 19:08:47 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:09:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:09:13 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:09:13 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:09:13 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:09:13 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:09:13 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:09:13 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"2"}
+CRITICAL - 2025-07-16 19:09:13 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:09:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:09:26 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:09:26 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:09:26 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:09:26 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:09:26 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:09:26 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"1"}
+CRITICAL - 2025-07-16 19:09:26 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:09:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:09:36 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:09:36 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:09:36 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:09:36 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:09:36 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:09:36 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"1"}
+CRITICAL - 2025-07-16 19:09:36 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:09:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:09:38 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:09:38 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:09:38 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:09:38 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:09:38 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:09:38 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"2"}
+CRITICAL - 2025-07-16 19:09:38 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:09:40 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:09:40 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:09:40 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:09:40 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:09:40 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:09:40 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"3"}
+CRITICAL - 2025-07-16 19:09:40 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2025-07-16 19:09:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-16 19:09:43 --> TamuFilter: Metode before dipicu untuk URI: http://localhost/hotel10/public/index.php/tamu/check-room-availability
+DEBUG - 2025-07-16 19:09:43 --> TamuFilter: Peran sesi saat ini: tamu
+DEBUG - 2025-07-16 19:09:43 --> TamuFilter: Status login: true
+DEBUG - 2025-07-16 19:09:43 --> TamuFilter: Pengguna adalah tamu. Melanjutkan permintaan.
+DEBUG - 2025-07-16 19:09:43 --> TamuController: checkRoomAvailability method triggered.
+DEBUG - 2025-07-16 19:09:43 --> TamuController: checkRoomAvailability - Input: {"tgl_masuk":"2025-07-18","tgl_keluar":"2025-07-20","jumlah_tamu":"4"}
+CRITICAL - 2025-07-16 19:09:43 --> ErrorException: Undefined property: App\Controllers\TamuController::$db
+[Method: POST, Route: tamu/check-room-availability]
+in APPPATH\Controllers\TamuController.php on line 79.
+ 1 APPPATH\Controllers\TamuController.php(79): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: App\\Controllers\\TamuController::$db', 'C:\\xampp\\htdocs\\hotel10\\app\\Controllers\\TamuController.php', 79)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\TamuController->checkRoomAvailability()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\TamuController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
