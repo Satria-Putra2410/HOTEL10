@@ -23,21 +23,31 @@ $routes->get('register', 'AuthController::register');
 $routes->post('register', 'AuthController::processRegister');
 $routes->get('logout', 'AuthController::logout');
 
-// HAPUS RUTE INI KARENA SUDAH DITANGANI DI DALAM GRUP TAMU
-// $routes->get('riwayat-reservasi', 'home::riwayat');
-
 // Grup Rute yang Memerlukan Login
 $routes->group('', ['filter' => 'auth'], function($routes) {
 
     // Grup Rute Admin (Memerlukan peran 'admin')
     $routes->group('admin', ['filter' => 'admin'], function($routes) {
-        // ... (semua rute admin Anda tetap di sini)
+
         $routes->get('dashboard', 'AdminController::index');
         $routes->get('checkin', 'AdminController::checkinPage');
         $routes->get('history', 'AdminController::history');
         $routes->get('reservasi/checkin/(:num)', 'AdminController::checkIn/$1');
         $routes->get('reservasi/selesaikan/(:num)', 'AdminController::selesaikanReservasi/$1');
-        $routes->resource('kamar', ['controller' => 'KamarController']);
+
+        // PERBAIKAN: Menambahkan rute spesifik untuk create dan store SEBELUM resource
+        $routes->get('kamar/create', 'KamarController::create');
+        $routes->post('kamar/store', 'KamarController::store');
+        $routes->get('kamar/edit/(:num)', 'KamarController::edit/$1');
+        $routes->post('kamar/update/(:num)', 'KamarController::update/$1');
+        $routes->get('kamar/(:num)/delete', 'KamarController::delete/$1');
+        
+        // PERBAIKAN: Menghapus semua metode yang sudah didefinisikan secara manual dari resource
+        $routes->resource('kamar', [
+            'controller' => 'KamarController', 
+            'except' => ['new', 'create', 'edit', 'update', 'delete']
+        ]);
+        
         $routes->get('unit-kamar', 'UnitKamarController::index');
         $routes->post('unit-kamar/store', 'UnitKamarController::store');
         $routes->get('unit-kamar/delete/(:num)', 'UnitKamarController::delete/$1');
