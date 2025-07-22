@@ -32,6 +32,10 @@
                     <!-- Kolom Kiri -->
                     <div>
                         <div class="mb-4">
+                            <label for="nomor_kamar" class="block text-gray-700 text-sm font-bold mb-2">Nomor Kamar</label>
+                            <input type="text" name="nomor_kamar" id="nomor_kamar" value="<?= old('nomor_kamar') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+                        <div class="mb-4">
                             <label for="tipe_kamar" class="block text-gray-700 text-sm font-bold mb-2">Tipe Kamar</label>
                             <input type="text" name="tipe_kamar" id="tipe_kamar" value="<?= old('tipe_kamar') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>

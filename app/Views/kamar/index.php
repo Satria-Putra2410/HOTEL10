@@ -67,6 +67,7 @@
                     <thead>
                         <tr class="border-b border-gray-700/50">
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Foto</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Nomor Kamar</th> <!-- Kolom baru -->
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tipe Kamar</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Harga/Malam</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Aksi</th>
@@ -75,7 +76,7 @@
                     <tbody class="divide-y divide-gray-700/50">
                         <?php if (empty($rooms)): ?>
                             <tr>
-                                <td colspan="4" class="px-6 py-16 text-center text-gray-400">
+                                <td colspan="5" class="px-6 py-16 text-center text-gray-400"> <!-- colspan disesuaikan -->
                                     <i class='bx bx-archive-out text-4xl mb-2'></i>
                                     <p>Belum ada data kamar.</p>
                                 </td>
@@ -85,6 +86,9 @@
                             <tr class="table-row">
                                 <td class="px-6 py-4">
                                     <img src="<?= base_url('uploads/kamar/' . $room['foto']) ?>" alt="<?= esc($room['tipe_kamar']) ?>" class="w-24 h-16 object-cover rounded">
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap font-semibold text-white">
+                                    <?= esc($room['nomor_kamar']) ?> <!-- Menampilkan nomor_kamar -->
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap font-semibold text-white">
                                     <?= esc($room['tipe_kamar']) ?>
@@ -97,6 +101,7 @@
                                     <a href="<?= base_url('admin/kamar/delete/' . $room['id_kamar']) ?>"
                                     class="inline-block bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
                                     onclick="return confirm('Anda yakin ingin menghapus kamar ini?')">Hapus</a>
+                                    <a href="<?= base_url('admin/kamar/' . $room['id_kamar']) ?>" class="inline-block bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm">Detail</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>

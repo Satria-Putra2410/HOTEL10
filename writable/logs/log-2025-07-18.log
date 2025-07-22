@@ -474,3 +474,257 @@ DEBUG - 2025-07-18 09:48:49 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-07-18 09:48:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-07-18 09:48:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-07-18 09:48:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:58:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:58:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:58:35 --> User logged out. Session destroyed.
+DEBUG - 2025-07-18 09:58:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 09:58:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:22 --> Admin login successful for email: man@mail.com
+DEBUG - 2025-07-18 10:15:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:15:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:16:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:16:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:18:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:19:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:20:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:21:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:21:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:21:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:23:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:23:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:25:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:26:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:27:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:27:44 --> Menampilkan form edit untuk kamar ID: 10
+DEBUG - 2025-07-18 10:27:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:27:52 --> Memulai update untuk kamar ID: 10
+DEBUG - 2025-07-18 10:27:52 --> Data kamar lama: {"id_kamar":"10","harga_kamar":"1400000.00","tipe_kamar":"kamar mayat","jenis_ranjang":"10 Kasur Kematian","jumlah_tamu":"10","foto":"1752834066_a3d1c5ef6e9f4e8734f0.jpg","deskripsi":"Menjelang Ajal","nomor_kamar":"202"}
+DEBUG - 2025-07-18 10:27:52 --> Aturan validasi foto dihapus karena tidak ada foto baru diupload atau foto tidak valid.
+DEBUG - 2025-07-18 10:27:52 --> Aturan is_unique untuk nomor_kamar dihapus karena nomor tidak berubah.
+INFO - 2025-07-18 10:27:52 --> Validasi berhasil untuk kamar ID: 10
+DEBUG - 2025-07-18 10:27:52 --> Tidak ada foto baru diupload, mempertahankan foto lama: 1752834066_a3d1c5ef6e9f4e8734f0.jpg
+INFO - 2025-07-18 10:27:52 --> Data final yang akan diperbarui untuk kamar ID 10: {"tipe_kamar":"kamar mayat","harga_kamar":"1400000.00","jenis_ranjang":"10 Kasur Kematianaa","jumlah_tamu":"10","deskripsi":"Menjelang Ajaldadldnl","nomor_kamar":"202","foto":"1752834066_a3d1c5ef6e9f4e8734f0.jpg"}
+ERROR - 2025-07-18 10:27:52 --> Gagal memperbarui data kamar ID 10 di database.
+DEBUG - 2025-07-18 10:27:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:27:52 --> Menampilkan form edit untuk kamar ID: 10
+DEBUG - 2025-07-18 10:27:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:27:55 --> Menampilkan form edit untuk kamar ID: 10
+DEBUG - 2025-07-18 10:27:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:28:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:29:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:29:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:29:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:29:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:38:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:38:25 --> Menampilkan form edit untuk kamar ID: 11
+DEBUG - 2025-07-18 10:38:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:38:28 --> Memulai update untuk kamar ID: 11
+DEBUG - 2025-07-18 10:38:28 --> Data kamar lama: {"id_kamar":"11","harga_kamar":"11.00","tipe_kamar":"kamar mayat","jenis_ranjang":"10 Kasur Kematianz","jumlah_tamu":"1","foto":"1752834511_7fa04b7e255dc4696e35.jpg","deskripsi":"1","nomor_kamar":"202"}
+DEBUG - 2025-07-18 10:38:28 --> Aturan validasi foto dihapus karena tidak ada foto baru diupload atau foto tidak valid.
+DEBUG - 2025-07-18 10:38:28 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:38:28 --> Validasi berhasil untuk kamar ID: 11
+DEBUG - 2025-07-18 10:38:28 --> Tidak ada foto baru diupload, mempertahankan foto lama: 1752834511_7fa04b7e255dc4696e35.jpg
+INFO - 2025-07-18 10:38:28 --> Data final yang akan diperbarui untuk kamar ID 11: {"tipe_kamar":"kamar mayat","harga_kamar":"11.00","jenis_ranjang":"10 Kasur Kematianz","jumlah_tamu":"1","deskripsi":"11","nomor_kamar":"202","foto":"1752834511_7fa04b7e255dc4696e35.jpg"}
+ERROR - 2025-07-18 10:38:28 --> Gagal memperbarui data kamar ID 11 di database.
+DEBUG - 2025-07-18 10:38:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:38:28 --> Menampilkan form edit untuk kamar ID: 11
+DEBUG - 2025-07-18 10:38:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:38:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:38:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:38:46 --> Data kamar baru yang akan disimpan: {"tipe_kamar":"apaya","harga_kamar":"123","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","nomor_kamar":"203"}
+INFO - 2025-07-18 10:38:46 --> Kamar baru berhasil ditambahkan.
+DEBUG - 2025-07-18 10:38:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:38:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:38:54 --> Kamar ID 11 dan foto terkait dihapus.
+DEBUG - 2025-07-18 10:38:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:38:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:38:57 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:40:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:40:20 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:40:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:40:22 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:40:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:40:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:40:31 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:41:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:41:11 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:41:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:41:15 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:41:15 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:41:15 --> Aturan validasi foto dihapus karena gambar tidak dapat diedit.
+DEBUG - 2025-07-18 10:41:15 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:41:15 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:41:15 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:41:15 --> Gagal memperbarui data kamar ID 12 di database.
+DEBUG - 2025-07-18 10:41:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:41:15 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:41:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:41:26 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:41:29 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:41:29 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:41:29 --> Aturan validasi foto dihapus karena gambar tidak dapat diedit.
+DEBUG - 2025-07-18 10:41:29 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:41:29 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:41:29 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:41:29 --> Gagal memperbarui data kamar ID 12 di database.
+DEBUG - 2025-07-18 10:41:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:41:29 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:45:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:45:41 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:45:41 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:45:41 --> Aturan validasi foto dihapus karena gambar tidak dapat diedit.
+DEBUG - 2025-07-18 10:45:41 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:45:41 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:45:41 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:45:41 --> Gagal memperbarui data kamar ID 12 di database.
+DEBUG - 2025-07-18 10:45:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:45:41 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:46:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:46:40 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:46:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:46:43 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:46:43 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:46:43 --> Aturan validasi foto dihapus karena tidak ada foto baru diupload atau foto tidak valid.
+DEBUG - 2025-07-18 10:46:43 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:46:43 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:46:43 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:46:43 --> Gagal memperbarui data kamar ID 12 di database. Error Model: {"foto":"Anda wajib memilih sebuah foto kamar."}
+DEBUG - 2025-07-18 10:46:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:46:43 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:54:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:54:13 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:54:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:54:16 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:54:16 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:54:16 --> Aturan validasi foto dihapus secara unkondisional karena gambar tidak dapat diedit.
+DEBUG - 2025-07-18 10:54:16 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:54:16 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:54:16 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:54:16 --> Gagal memperbarui data kamar ID 12 di database. Error Model: {"foto":"Anda wajib memilih sebuah foto kamar."}
+DEBUG - 2025-07-18 10:54:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:54:17 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:57:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:57:40 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:57:43 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:57:43 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:57:43 --> Aturan validasi foto tidak ada di getUpdateValidationRules().
+DEBUG - 2025-07-18 10:57:43 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:57:43 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:57:43 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:57:43 --> Gagal memperbarui data kamar ID 12 di database. Error Model: {"foto":"Anda wajib memilih sebuah foto kamar."}
+DEBUG - 2025-07-18 10:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:57:43 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:59:10 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:59:12 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:12 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:59:12 --> Aturan validasi foto tidak ada di getUpdateValidationRules().
+DEBUG - 2025-07-18 10:59:12 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:59:12 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:59:12 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"123","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:59:12 --> Gagal memperbarui data kamar ID 12 di database. Error Model: {"foto":"Anda wajib memilih sebuah foto kamar."}
+DEBUG - 2025-07-18 10:59:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:59:12 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:59:22 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:22 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:59:22 --> Aturan validasi foto tidak ada di getUpdateValidationRules().
+DEBUG - 2025-07-18 10:59:22 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:59:22 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:59:22 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1234","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:59:22 --> Gagal memperbarui data kamar ID 12 di database. Error Model: {"foto":"Anda wajib memilih sebuah foto kamar."}
+DEBUG - 2025-07-18 10:59:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:59:22 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:59:37 --> Menampilkan form edit untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-07-18 10:59:39 --> Memulai update untuk kamar ID: 12
+DEBUG - 2025-07-18 10:59:39 --> Data kamar lama: {"id_kamar":"12","harga_kamar":"123.00","tipe_kamar":"apaya","jenis_ranjang":"123","jumlah_tamu":"123","foto":"1752835126_9d3c2ea446312c58fdca.png","deskripsi":"123","nomor_kamar":"203"}
+DEBUG - 2025-07-18 10:59:39 --> Aturan validasi foto tidak ada di getUpdateValidationRules().
+DEBUG - 2025-07-18 10:59:39 --> Aturan is_unique untuk nomor_kamar tidak diterapkan (dihapus dari model).
+INFO - 2025-07-18 10:59:39 --> Validasi berhasil untuk kamar ID: 12
+INFO - 2025-07-18 10:59:39 --> Data final yang akan diperbarui untuk kamar ID 12: {"tipe_kamar":"apaya","harga_kamar":"123.00","jenis_ranjang":"123","jumlah_tamu":"123","deskripsi":"1233","nomor_kamar":"203","foto":"1752835126_9d3c2ea446312c58fdca.png"}
+ERROR - 2025-07-18 10:59:39 --> Gagal memperbarui data kamar ID 12 di database. Error Model: {"foto":"Anda wajib memilih sebuah foto kamar."}
+DEBUG - 2025-07-18 10:59:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-07-18 10:59:39 --> Menampilkan form edit untuk kamar ID: 12
