@@ -56,7 +56,7 @@
 
         <!-- Tabel Kamar -->
         <div class="glass-effect rounded-2xl overflow-hidden shadow-2xl">
-            <div class="overflow-x-auto">
+            <div class="overflow-x-hidden">
                 <table class="min-w-full">
                     <thead>
                         <tr class="border-b border-gray-700/50">
