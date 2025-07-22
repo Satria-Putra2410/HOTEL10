@@ -1,1 +1,15 @@
-/writable/
+# ======================================================
+# Aturan untuk Folder Writable CodeIgniter 4
+# ======================================================
+
+# Abaikan semua file dan folder di dalam direktori writable.
+# Ini akan mencakup /logs, /debugbar, /session, /cache, dan /uploads
+# yang ada di dalam writable.
+/writable/*
+
+# PENTING: Jangan abaikan file .gitkeep.
+# Baris ini memastikan bahwa folder 'writable' yang kosong akan
+# tetap ada saat proyek di-clone oleh orang lain, sehingga
+# aplikasi tidak error. Buat file kosong bernama .gitkeep
+# di dalam folder writable jika belum ada.
+!/writable/.gitkeep
