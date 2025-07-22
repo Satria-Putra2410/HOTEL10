@@ -48,4 +48,8 @@ class Home extends BaseController
     {
         return view('pages/museum');
     }
+    public function riwayat(): string
+    {
+        return view('riwayat-reservasi');
+    }
 }
