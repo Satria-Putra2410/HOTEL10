@@ -302,4 +302,136 @@ class TamuController extends BaseController
         
         return redirect()->to(base_url('tamu/dashboard'))->with('success', 'Profil berhasil diperbarui.');
     }
+
+
+
+    public function reservasi_form()
+    {
+        // Cek apakah user sudah login
+        if (!session()->get('logged_in') || session()->get('role') !== 'tamu') {
+            return redirect()->to(base_url('login'));
+        }
+
+        // Ambil data dari query string
+        $idUnitKamar = $this->request->getGet('id_unit_kamar');
+        $tglMasuk = $this->request->getGet('tgl_masuk');
+        $tglKeluar = $this->request->getGet('tgl_keluar');
+        $jumlahTamu = $this->request->getGet('jumlah_tamu');
+        $hargaKamar = $this->request->getGet('harga_kamar');
+
+        // Validasi data yang diperlukan
+        if (!$idUnitKamar || !$tglMasuk || !$tglKeluar || !$jumlahTamu) {
+            session()->setFlashdata('error', 'Data reservasi tidak lengkap.');
+            return redirect()->to(base_url('tamu/dashboard'));
+        }
+
+        // Ambil data tamu dari session
+        $idTamu = session()->get('id_tamu');
+        
+        // Ambil detail tamu dari database
+        $tamuModel = new \App\Models\TamuModel();
+        $dataTamu = $tamuModel->find($idTamu);
+
+        // Ambil detail kamar
+        $unitKamarModel = new \App\Models\UnitKamarModel();
+        $kamarModel = new \App\Models\KamarModel();
+        
+        $unitKamar = $unitKamarModel->find($idUnitKamar);
+        $kamar = $kamarModel->find($unitKamar['id_kamar']);
+
+        // Hitung total harga
+        $checkin = new DateTime($tglMasuk);
+        $checkout = new DateTime($tglKeluar);
+        $interval = $checkin->diff($checkout);
+        $jumlahHari = $interval->days;
+        $totalHarga = $jumlahHari * $hargaKamar;
+
+        $data = [
+            'title' => 'Form Reservasi Kamar',
+            'tamu' => $dataTamu,
+            'kamar' => $kamar,
+            'unit_kamar' => $unitKamar,
+            'tgl_masuk' => $tglMasuk,
+            'tgl_keluar' => $tglKeluar,
+            'jumlah_tamu' => $jumlahTamu,
+            'jumlah_hari' => $jumlahHari,
+            'harga_kamar' => $hargaKamar,
+            'total_harga' => $totalHarga
+        ];
+
+        return view('tamu/reservasi_form', $data);
+    }
+
+    public function proses_reservasi()
+    {
+        // Cek apakah user sudah login
+        if (!session()->get('logged_in') || session()->get('role') !== 'tamu') {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Unauthorized access'
+            ]);
+        }
+
+        $json = $this->request->getJSON(true);
+        
+        $idTamu = session()->get('id_tamu');
+        $idUnitKamar = $json['id_unit_kamar'];
+        $tglMasuk = $json['tgl_masuk'];
+        $tglKeluar = $json['tgl_keluar'];
+        $totalHarga = $json['total_harga'];
+        $namaTamu = $json['nama_tamu'];
+        $noHpTamu = $json['no_hp_tamu'];
+
+        // Update data tamu jika ada perubahan
+        if ($namaTamu || $noHpTamu) {
+            $tamuModel = new \App\Models\TamuModel();
+            $updateData = [];
+            
+            if ($namaTamu) $updateData['nama'] = $namaTamu;
+            if ($noHpTamu) $updateData['no_hp'] = $noHpTamu;
+            
+            if (!empty($updateData)) {
+                $tamuModel->update($idTamu, $updateData);
+            }
+        }
+
+        try {
+            // Buat reservasi
+            $reservasiModel = new \App\Models\ReservasiModel();
+            
+            $reservasiData = [
+                'id_tamu' => $idTamu,
+                'id_unit_kamar' => $idUnitKamar,
+                'tgl_reservasi' => date('Y-m-d H:i:s'),
+                'tgl_masuk' => $tglMasuk,
+                'tgl_keluar' => $tglKeluar,
+                'total_harga' => $totalHarga,
+                'status_reservasi' => 'pending',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ];
+
+            $idReservasi = $reservasiModel->insert($reservasiData);
+
+            if ($idReservasi) {
+                return $this->response->setJSON([
+                    'status' => 'success',
+                    'message' => 'Reservasi berhasil dibuat',
+                    'id_reservasi' => $idReservasi
+                ]);
+            } else {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'Gagal membuat reservasi'
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Terjadi kesalahan: ' . $e->getMessage()
+            ]);
+        }
+    }
+
 }

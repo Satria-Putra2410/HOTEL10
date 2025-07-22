@@ -22,6 +22,7 @@ $routes->post('login', 'AuthController::processLogin');
 $routes->get('register', 'AuthController::register');
 $routes->post('register', 'AuthController::processRegister');
 $routes->get('logout', 'AuthController::logout');
+$routes->get('riwayat-reservasi', 'home::riwayat');
 
 // Grup Rute yang Memerlukan Login
 $routes->group('', ['filter' => 'auth'], function($routes) {
@@ -35,7 +36,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->get('history', 'AdminController::history');
 
         // Aksi Reservasi
-        $routes->get('reservasi/check-in/(:num)', 'AdminController::checkIn/$1');
+        $routes->get('reservasi/checkin/(:num)', 'AdminController::checkIn/$1');
         $routes->get('reservasi/selesaikan/(:num)', 'AdminController::selesaikanReservasi/$1');
 
         // Manajemen Kamar (Rute spesifik harus di atas resource)
@@ -67,4 +68,11 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
         $routes->get('profil', 'TamuController::editProfil');
         $routes->post('profil', 'TamuController::updateProfil');
     });
+
+        // Route untuk halaman form reservasi
+        $routes->get('tamu/reservasi-form', 'TamuController::reservasi_form');
+
+        // Route untuk memproses reservasi
+        $routes->post('tamu/proses-reservasi', 'TamuController::proses_reservasi');
+
 });

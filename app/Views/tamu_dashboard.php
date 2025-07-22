@@ -164,7 +164,7 @@
             border-radius: 50%;
         }
     </style>
-</head>
+</head> 
 <body class="gradient-bg text-white min-h-screen">
 
     <nav class="nav-glass p-4 shadow-2xl sticky top-0 z-50">
@@ -258,7 +258,7 @@
                 </div>
             </a>
 
-            <a href="<?= base_url('tamu/riwayat-reservasi') ?>" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
+            <a href="<?= base_url('riwayat-reservasi') ?>" class="scroll-float card-hover glass-effect p-8 rounded-2xl shadow-2xl card-pattern group">
                 <div class="flex items-center gap-6 mb-4">
                     <div class="p-4 bg-red-600/20 rounded-2xl group-hover:bg-red-600/30 transition-all duration-300">
                         <svg class="w-10 h-10 fill-red-400 icon-glow floating-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="animation-delay: 0.5s;">
