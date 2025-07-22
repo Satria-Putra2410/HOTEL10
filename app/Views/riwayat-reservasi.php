@@ -72,10 +72,6 @@
             border-bottom: 1px solid rgba(220, 38, 38, 0.2);
         }
 
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%);
-        }
-
         .pulse-animation {
             animation: pulse 2s infinite;
         }
@@ -168,22 +164,18 @@
             letter-spacing: 0.05em;
         }
 
-        .status-pending {
+        /* PERBAIKAN: Menyamakan class dengan status dari database */
+        .status-reserved {
             background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
         }
 
-        .status-confirmed {
+        .status-check-in {
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
         }
 
-        .status-cancelled {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-        }
-
-        .status-completed {
+        .status-selesai {
             background: linear-gradient(135deg, #6366f1, #4f46e5);
             color: white;
         }
@@ -192,19 +184,16 @@
             border-left: 4px solid transparent;
         }
 
-        .reservation-card.pending {
+        /* PERBAIKAN: Menyamakan class dengan status dari database */
+        .reservation-card.reserved {
             border-left-color: #f59e0b;
         }
 
-        .reservation-card.confirmed {
+        .reservation-card.check-in {
             border-left-color: #10b981;
         }
 
-        .reservation-card.cancelled {
-            border-left-color: #ef4444;
-        }
-
-        .reservation-card.completed {
+        .reservation-card.selesai {
             border-left-color: #6366f1;
         }
 
@@ -305,18 +294,20 @@
                 <button class="filter-btn filter-active px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="all">
                     Semua
                 </button>
-                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="pending">
-                    Menunggu Konfirmasi
+                <!-- PERBAIKAN: Menyamakan data-status dengan nilai dari database (dalam huruf kecil) -->
+                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="reserved">
+                    Reserved
                 </button>
-                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="confirmed">
-                    Dikonfirmasi
+                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="check-in">
+                    Check-In
                 </button>
-                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="completed">
+                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="selesai">
                     Selesai
                 </button>
-                <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="cancelled">
+                <!-- Anda bisa menambahkan tombol Dibatalkan jika ada statusnya di DB -->
+                <!-- <button class="filter-btn filter-inactive px-6 py-2 rounded-lg font-semibold transition-all duration-300" data-status="dibatalkan">
                     Dibatalkan
-                </button>
+                </button> -->
             </div>
         </div>
     </section>
@@ -325,13 +316,7 @@
     <section class="max-w-7xl mx-auto px-6 pb-12">
         <div id="reservationsList" class="space-y-6">
             <!-- Loading skeletons will be shown initially -->
-            <div class="loading-skeleton-container">
-                <div class="glass-effect p-6 rounded-2xl shadow-lg">
-                    <div class="loading-skeleton h-6 w-3/4 mb-4 rounded"></div>
-                    <div class="loading-skeleton h-4 w-1/2 mb-2 rounded"></div>
-                    <div class="loading-skeleton h-4 w-2/3 mb-2 rounded"></div>
-                    <div class="loading-skeleton h-4 w-1/3 rounded"></div>
-                </div>
+            <div class="loading-skeleton-container space-y-6">
                 <div class="glass-effect p-6 rounded-2xl shadow-lg">
                     <div class="loading-skeleton h-6 w-3/4 mb-4 rounded"></div>
                     <div class="loading-skeleton h-4 w-1/2 mb-2 rounded"></div>
@@ -347,7 +332,7 @@
             </div>
             
             <!-- Actual reservations will be loaded here -->
-            <div id="reservationsContent" style="display: none;"></div>
+            <div id="reservationsContent" class="space-y-6" style="display: none;"></div>
             
             <!-- Empty state -->
             <div id="emptyState" class="glass-effect p-12 rounded-2xl shadow-2xl text-center" style="display: none;">
@@ -387,5 +372,184 @@
         </div>
     </footer>
 
+    <!-- ====================================================== -->
+    <!-- MULAI KODE JAVASCRIPT                                    -->
+    <!-- ====================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const skeletonContainer = document.querySelector('.loading-skeleton-container');
+            const reservationsContent = document.getElementById('reservationsContent');
+            const emptyState = document.getElementById('emptyState');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const detailModal = document.getElementById('detailModal');
+            const closeModal = document.getElementById('closeModal');
+            const modalContent = document.getElementById('modalContent');
+
+            let allReservations = [];
+
+            const formatDate = (dateString) => new Date(dateString).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+            const formatCurrency = (number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+            
+            function renderReservations(statusFilter = 'all') {
+                reservationsContent.innerHTML = '';
+                
+                const filteredReservations = statusFilter === 'all' 
+                    ? allReservations 
+                    : allReservations.filter(res => res.status && res.status.toLowerCase() === statusFilter);
+
+                if (filteredReservations.length === 0) {
+                    emptyState.style.display = 'block';
+                    reservationsContent.style.display = 'none';
+                } else {
+                    emptyState.style.display = 'none';
+                    reservationsContent.style.display = 'block';
+
+                    filteredReservations.forEach(res => {
+                        // PERBAIKAN: Menggunakan replace untuk menangani 'Check-In' menjadi 'check-in'
+                        const status = res.status ? res.status.toLowerCase().replace(' ', '-') : 'reserved';
+                        
+                        // PERBAIKAN: Menyamakan keys dengan status dari database
+                        const statusClasses = {
+                            'reserved': 'status-reserved',
+                            'check-in': 'status-check-in',
+                            'selesai': 'status-selesai'
+                        };
+                        const borderClasses = {
+                            'reserved': 'reserved',
+                            'check-in': 'check-in',
+                            'selesai': 'selesai'
+                        };
+
+                        const cardHTML = `
+                            <div class="reservation-card ${borderClasses[status] || ''} card-hover glass-effect p-6 rounded-2xl shadow-lg cursor-pointer" data-id="${res.id_reservasi}">
+                                <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                                    <div>
+                                        <h3 class="text-2xl font-bold mb-2">${res.nama_kamar || 'Tipe Kamar Tidak Diketahui'} - ${res.nomor_kamar || ''}</h3>
+                                        <p class="text-gray-300">ID Reservasi: <span class="font-semibold text-red-400">${res.id_reservasi}</span></p>
+                                        <p class="text-gray-300">Check-in: <span class="font-semibold">${formatDate(res.tgl_checkin)}</span></p>
+                                        <p class="text-gray-300">Check-out: <span class="font-semibold">${formatDate(res.tgl_checkout)}</span></p>
+                                    </div>
+                                    <div class="mt-4 md:mt-0 text-right">
+                                        <span class="status-badge ${statusClasses[status] || ''}">${res.status || 'Reserved'}</span>
+                                        <p class="text-2xl font-bold mt-2">${formatCurrency(res.total_harga || 0)}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        reservationsContent.insertAdjacentHTML('beforeend', cardHTML);
+                    });
+                }
+                
+                document.querySelectorAll('.reservation-card').forEach(card => {
+                    card.addEventListener('click', () => showDetail(card.dataset.id));
+                });
+            }
+
+            async function fetchReservations() {
+                try {
+                    skeletonContainer.style.display = 'block';
+                    reservationsContent.style.display = 'none';
+                    emptyState.style.display = 'none';
+
+                    const response = await fetch('<?= base_url('tamu/api/riwayat') ?>');
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const data = await response.json();
+                    allReservations = Array.isArray(data) ? data : [];
+                    
+                    if (allReservations.length > 0) {
+                        renderReservations();
+                    } else {
+                        emptyState.style.display = 'block';
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching reservations:', error);
+                    emptyState.querySelector('h3').textContent = 'Terjadi Kesalahan';
+                    emptyState.querySelector('p').textContent = 'Tidak dapat memuat riwayat reservasi Anda. Silakan coba lagi nanti.';
+                    emptyState.style.display = 'block';
+                } finally {
+                    skeletonContainer.style.display = 'none';
+                }
+            }
+
+            function showDetail(reservationId) {
+                const reservation = allReservations.find(res => res.id_reservasi == reservationId);
+                if (!reservation) return;
+
+                const status = reservation.status ? reservation.status.toLowerCase().replace(' ', '-') : 'reserved';
+                const statusClassMap = {
+                    'reserved': 'status-reserved',
+                    'check-in': 'status-check-in',
+                    'selesai': 'status-selesai'
+                };
+                const statusClass = statusClassMap[status] || '';
+
+                modalContent.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase">Kamar</h4>
+                                <p class="text-xl font-bold">${reservation.nama_kamar || 'N/A'} (${reservation.nomor_kamar || 'N/A'})</p>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase">ID Reservasi</h4>
+                                <p class="text-xl font-bold text-red-400">${reservation.id_reservasi}</p>
+                            </div>
+                        </div>
+                        <hr class="border-gray-700">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase">Tanggal Check-in</h4>
+                                <p class="text-lg">${formatDate(reservation.tgl_checkin)}</p>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase">Tanggal Check-out</h4>
+                                <p class="text-lg">${formatDate(reservation.tgl_checkout)}</p>
+                            </div>
+                        </div>
+                         <div>
+                            <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase">Jumlah Tamu</h4>
+                            <p class="text-lg">${reservation.jumlah_tamu || 1} Orang</p>
+                        </div>
+                        <hr class="border-gray-700">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase">Total Harga</h4>
+                                <p class="text-3xl font-bold text-green-400">${formatCurrency(reservation.total_harga || 0)}</p>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-400 text-sm font-semibold tracking-wider uppercase text-right">Status</h4>
+                                <span class="status-badge ${statusClass} mt-1 inline-block">${reservation.status || 'Reserved'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                detailModal.style.display = 'flex';
+            }
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.replace('filter-active', 'filter-inactive'));
+                    button.classList.replace('filter-inactive', 'filter-active');
+                    renderReservations(button.dataset.status);
+                });
+            });
+
+            closeModal.addEventListener('click', () => detailModal.style.display = 'none');
+            detailModal.addEventListener('click', (e) => {
+                if (e.target === detailModal) detailModal.style.display = 'none';
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('show');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.scroll-float').forEach(el => observer.observe(el));
+
+            fetchReservations();
+        });
+    </script>
 </body>
 </html>
