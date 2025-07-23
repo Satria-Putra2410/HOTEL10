@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dashboard Tamu</title>
+    <!-- 1. Tambahkan script Snap.js dari Midtrans -->
+    <script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="<?= (new \Config\Midtrans())->clientKey ?>"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
@@ -164,7 +168,7 @@
             border-radius: 50%;
         }
     </style>
-</head>
+</head> 
 <body class="gradient-bg text-white min-h-screen">
 
     <nav class="nav-glass p-4 shadow-2xl sticky top-0 z-50">
@@ -310,11 +314,11 @@
             <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="checkin_date" class="block text-gray-300 text-sm font-bold mb-2">Tanggal Check-in:</label>
-                    <input type="date" id="checkin_date" name="tgl_masuk" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required min="<?= date('Y-m-d') ?>">
+                    <input type="date" id="checkin_date" name="tgl_masuk" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
                 <div>
                     <label for="checkout_date" class="block text-gray-300 text-sm font-bold mb-2">Tanggal Check-out:</label>
-                    <input type="date" id="checkout_date" name="tgl_keluar" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>">
+                    <input type="date" id="checkout_date" name="tgl_keluar" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
                 <div>
                     <label for="num_guests" class="block text-gray-300 text-sm font-bold mb-2">Jumlah Tamu:</label>
@@ -370,10 +374,10 @@
                                 <img src="<?= base_url('icon/Digital_Glyph_Green.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://x.com" target="_blank">
-                                <img src="<?= base_url('icon/logo-white.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
+                                <img src="<?= base_url('icon/logo-white.png') ?>" alt="X" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://facebook.com" target="_blank">
-                                <img src="<?= base_url('icon/Facebook_Logo_Primary.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
+                                <img src="<?= base_url('icon/Facebook_Logo_Primary.png') ?>" alt="Facebook" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                         </div>
                     </div>
@@ -420,6 +424,10 @@
             const noRoomsFound = document.getElementById('noRoomsFound');
             const loadingIndicator = document.getElementById('loadingIndicator');
 
+            // 2. Deklarasikan variabel tanggal di scope yang lebih tinggi
+            let checkinDate = '';
+            let checkoutDate = '';
+
             // Set min date for check-in to today
             const today = new Date();
             const tomorrow = new Date(today);
@@ -432,14 +440,14 @@
 
             checkinDateInput.addEventListener('change', () => {
                 if (checkinDateInput.value) {
-                    const checkinDate = new Date(checkinDateInput.value);
-                    const minCheckoutDate = new Date(checkinDate);
+                    const selectedCheckinDate = new Date(checkinDateInput.value);
+                    const minCheckoutDate = new Date(selectedCheckinDate);
                     minCheckoutDate.setDate(minCheckoutDate.getDate() + 1);
-                    checkoutDateInput.min = minCheckoutDate.toISOString().split('T')[0];
+                    const minCheckoutISO = minCheckoutDate.toISOString().split('T')[0];
+                    checkoutDateInput.min = minCheckoutISO;
                     
-                    // If checkout date is before or same as new checkin date, reset it
-                    if (checkoutDateInput.value && new Date(checkoutDateInput.value) <= checkinDate) {
-                        checkoutDateInput.value = minCheckoutDate.toISOString().split('T')[0];
+                    if (checkoutDateInput.value && new Date(checkoutDateInput.value) <= selectedCheckinDate) {
+                        checkoutDateInput.value = minCheckoutISO;
                     }
                 } else {
                     checkoutDateInput.min = tomorrowISO;
@@ -450,12 +458,13 @@
             bookingForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                roomListDiv.innerHTML = ''; // Clear previous results
-                noRoomsFound.classList.add('hidden'); // Hide "no rooms found" message
-                loadingIndicator.classList.remove('hidden'); // Show loading indicator
+                roomListDiv.innerHTML = '';
+                noRoomsFound.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
 
-                const checkinDate = checkinDateInput.value;
-                const checkoutDate = checkoutDateInput.value;
+                // 3. Isi nilai variabel tanggal saat form disubmit
+                checkinDate = checkinDateInput.value;
+                checkoutDate = checkoutDateInput.value;
                 const numGuests = document.getElementById('num_guests').value;
 
                 if (!checkinDate || !checkoutDate || !numGuests) {
@@ -464,7 +473,6 @@
                     return;
                 }
 
-                // Client-side date validation
                 if (new Date(checkinDate) >= new Date(checkoutDate)) {
                     alert('Tanggal Check-out harus setelah Tanggal Check-in.');
                     loadingIndicator.classList.add('hidden');
@@ -486,7 +494,7 @@
                     });
 
                     const data = await response.json();
-                    loadingIndicator.classList.add('hidden'); // Hide loading indicator
+                    loadingIndicator.classList.add('hidden');
 
                     if (data.status === 'success' && data.rooms.length > 0) {
                         data.rooms.forEach(room => {
@@ -499,63 +507,76 @@
                                     <p class="text-gray-300">Deskripsi: ${room.deskripsi || 'Tidak ada deskripsi.'}</p>
                                     <p class="text-2xl font-bold text-red-400 mt-auto">Rp ${parseFloat(room.harga_kamar).toLocaleString('id-ID')}</p>
                                     <button class="book-room-btn w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
-                                            data-id-unit-kamar="${room.id_unit_kamar}"
-                                            data-harga-kamar="${room.harga_kamar}"
+                                            data-id-kamar="${room.id_kamar}"
                                             data-tipe-kamar="${room.tipe_kamar}"
                                             data-nomor-kamar="${room.nomor_kamar}">
-                                        Pesan Kamar Ini
+                                        Pesan & Bayar
                                     </button>
                                 </div>
                             `;
                             roomListDiv.insertAdjacentHTML('beforeend', roomCard);
                         });
 
-                        // Add event listeners for booking buttons
                         document.querySelectorAll('.book-room-btn').forEach(button => {
                             button.addEventListener('click', async (event) => {
-                                const idUnitKamar = event.target.dataset.idUnitKamar;
-                                const hargaKamar = parseFloat(event.target.dataset.hargaKamar);
+                                const idKamar = event.target.dataset.idKamar;
                                 const tipeKamar = event.target.dataset.tipeKamar;
                                 const nomorKamar = event.target.dataset.nomorKamar;
 
+                                // 4. Gunakan variabel tanggal yang sudah ada di scope ini
                                 if (!confirm(`Anda yakin ingin memesan kamar ${tipeKamar} No. ${nomorKamar} dari ${checkinDate} sampai ${checkoutDate}?`)) {
                                     return;
                                 }
 
                                 try {
-                                    const reservationResponse = await fetch('<?= base_url('tamu/create-reservation') ?>', {
+                                    // 5. Ubah endpoint ke 'initiate-payment'
+                                    const reservationResponse = await fetch('<?= base_url('tamu/initiate-payment') ?>', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
                                             'X-Requested-With': 'XMLHttpRequest'
                                         },
                                         body: JSON.stringify({
-                                            id_unit_kamar: idUnitKamar,
+                                            id_kamar: idKamar,
                                             tgl_masuk: checkinDate,
-                                            tgl_keluar: checkoutDate,
-                                            harga_kamar: hargaKamar // Pass harga_kamar for total price calculation in backend
+                                            tgl_keluar: checkoutDate
                                         })
                                     });
 
                                     const reservationData = await reservationResponse.json();
 
-                                    if (reservationData.status === 'success') {
-                                        alert('Pemesanan berhasil! ID Reservasi Anda: ' + reservationData.id_reservasi);
-                                        // Optional: Redirect to reservation history or clear form
-                                        window.location.reload(); // Reload dashboard to reflect changes
+                                    // 6. Ganti logika alert dengan snap.pay()
+                                    if (reservationResponse.ok && reservationData.status === 'success') {
+                                        snap.pay(reservationData.snap_token, {
+                                            onSuccess: function(result){
+                                                window.location.href = "<?= base_url('tamu/payment-finish') ?>?order_id=" + result.order_id;
+                                            },
+                                            onPending: function(result){
+                                                window.location.href = "<?= base_url('tamu/payment-finish') ?>?order_id=" + result.order_id;
+                                            },
+                                            onError: function(result){
+                                                alert("Pembayaran gagal!");
+                                                console.log(result);
+                                            },
+                                            onClose: function(){
+                                                alert('Memeriksa status pembayaran terakhir...');
+                                                // Arahkan ke riwayat untuk melihat status pending
+                                                window.location.href = "<?= base_url('tamu/riwayat-reservasi') ?>";
+                                            }
+                                        });
                                     } else {
-                                        alert('Pemesanan gagal: ' + reservationData.message);
+                                        alert('Gagal memulai pembayaran: ' + (reservationData.message || 'Terjadi kesalahan pada server.'));
                                     }
 
                                 } catch (error) {
-                                    console.error('Error during reservation:', error);
-                                    alert('Terjadi kesalahan saat memesan kamar.');
+                                    console.error('Error during payment initiation:', error);
+                                    alert('Terjadi kesalahan saat memulai pembayaran.');
                                 }
                             });
                         });
 
                     } else {
-                        noRoomsFound.classList.remove('hidden'); // Show "no rooms found"
+                        noRoomsFound.classList.remove('hidden');
                     }
 
                 } catch (error) {

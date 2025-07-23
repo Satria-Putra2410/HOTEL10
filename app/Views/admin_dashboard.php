@@ -17,19 +17,7 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .scroll-float {
-            opacity: 0;
-            transition: all 2s ease-out;
-        }
-
-        .scroll-float.show {
-            animation: floatIn 1.5s ease forwards;
-        }
-
-        @keyframes floatIn {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        /* ... (CSS Anda yang lain tetap sama) ... */
 
         .gradient-bg {
             background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #0f172a 100%);
@@ -79,14 +67,14 @@
             transition: all 0.3s ease;
         }
 
-        .btn-checkin { /* Mengubah nama class agar lebih sesuai */
+        .btn-checkin {
             background: linear-gradient(135deg, #10b981, #059669);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .btn-checkin::before { /* Mengubah nama class agar lebih sesuai */
+        .btn-checkin::before {
             content: '';
             position: absolute;
             top: 0;
@@ -97,11 +85,11 @@
             transition: left 0.5s ease;
         }
 
-        .btn-checkin:hover::before { /* Mengubah nama class agar lebih sesuai */
+        .btn-checkin:hover::before {
             left: 100%;
         }
 
-        .btn-checkin:hover { /* Mengubah nama class agar lebih sesuai */
+        .btn-checkin:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
@@ -148,6 +136,20 @@
         .glow-effect {
             box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
         }
+
+        /* ====================================================== */
+        /* CSS BARU UNTUK TOMBOL LOGOUT                           */
+        /* ====================================================== */
+        #logoutButton {
+            /* Kunci utama agar bisa dipindah-pindah posisinya */
+            position: absolute; 
+            /* Animasi perpindahan yang mulus */
+            transition: all 0.3s ease-in-out; 
+            /* Atur posisi awal agar tidak merusak layout navbar */
+            right: 1.5rem; /* Sesuaikan dengan padding container (p-6) */
+            top: 50%;
+            transform: translateY(-50%);
+        }
     </style>
 </head>
 <body class="gradient-bg text-white min-h-screen">
@@ -180,7 +182,7 @@
         <div class="mb-8 scroll-float">
             <div class="flex items-center space-x-4 mb-4">
                 <div class="p-3 bg-red-600/20 rounded-xl">
-                    <i class='bx bx-log-in-circle text-3xl text-red-400 floating-icon'></i> <!-- Icon diubah -->
+                    <i class='bx bx-log-in-circle text-3xl text-red-400 floating-icon'></i>
                 </div>
                 <div>
                     <h2 class="text-4xl font-bold text-shadow">
@@ -190,7 +192,7 @@
                 </div>
             </div>
             
-            <!-- Stats Cards (Tidak diubah) -->
+            <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div class="glass-effect p-6 rounded-xl card-hover">
                     <div class="flex items-center justify-between">
@@ -237,14 +239,14 @@
 
         <!-- Enhanced Table -->
         <div class="glass-effect rounded-2xl overflow-hidden shadow-2xl scroll-float">
-            <div class="overflow-x-auto">
+            <div class="overflow-x-hidden">
                 <table class="min-w-full">
                     <thead>
                         <tr class="table-header">
-                            <!-- PERUBAHAN: Header tabel disesuaikan -->
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Nama Tamu</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tipe Kamar</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tgl Check-in</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tgl Check-Out</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Status</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Aksi</th>
                         </tr>
@@ -252,7 +254,7 @@
                     <tbody class="divide-y divide-gray-700/50">
                         <?php if (empty($reservations)): ?>
                             <tr>
-                                <td colspan="5" class="px-6 py-16 text-center"> <!-- PERUBAHAN: colspan disesuaikan -->
+                                <td colspan="5" class="px-6 py-16 text-center">
                                     <div class="flex flex-col items-center space-y-4">
                                         <div class="p-6 bg-gray-600/20 rounded-full">
                                             <i class='bx bx-moon text-4xl text-gray-400'></i>
@@ -277,7 +279,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-semibold">
-                                        <?= esc($booking['tipe_kamar']) ?>
+                                        <?= esc($booking['id_reservasi']) ?>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
@@ -288,12 +290,17 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-2">
+                                        <i class='bx bx-calendar text-green-400 text-sm'></i>
+                                        <span class="text-sm text-gray-300"><?= date('d M Y', strtotime($booking['tgl_keluar'])) ?></span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center space-x-2">
                                         <div class="w-2 h-2 bg-yellow-500 rounded-full pulse-dot"></div>
                                         <span class="text-sm font-semibold text-yellow-400"><?= esc($booking['status']) ?></span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <!-- PERUBAHAN: Tombol dan link diubah untuk aksi Check-In -->
                                     <a href="<?= base_url('admin/reservasi/checkin/' . $booking['id_reservasi']) ?>" 
                                        class="btn-checkin text-white font-bold py-2 px-4 rounded-lg text-xs flex items-center space-x-2"
                                        onclick="return confirm('Anda yakin tamu ini akan Check-In sekarang?')">
@@ -318,7 +325,7 @@
     </footer>
 
     <script>
-        // Scroll Animation
+        // ... (Script Anda yang lain tetap sama) ...
         const scrollElements = document.querySelectorAll('.scroll-float');
         const elementInView = (el, offset = 100) => el.getBoundingClientRect().top <= (window.innerHeight - offset);
         const displayScrollElement = (element) => element.classList.add('show');
@@ -330,7 +337,6 @@
         window.addEventListener('scroll', handleScrollAnimation);
         window.addEventListener('load', handleScrollAnimation);
 
-        // Auto-hide alerts after 5 seconds
         setTimeout(() => {
             const alerts = document.querySelectorAll('.alert-success, .alert-error');
             alerts.forEach(alert => {
@@ -339,6 +345,36 @@
                 setTimeout(() => alert.remove(), 500);
             });
         }, 5000);
+
+        // ======================================================
+        // JAVASCRIPT BARU UNTUK TOMBOL LOGOUT PRANK
+        // ======================================================
+        // Cari tombol logout di dalam navbar yang di-include
+        const logoutButton = document.querySelector('#logoutButton');
+
+        if (logoutButton) {
+            // Fungsi untuk memindahkan tombol ke posisi acak
+            function pindahTombolLogout() {
+                // Dapatkan ukuran tombol setelah dirender
+                const buttonWidth = logoutButton.offsetWidth;
+                const buttonHeight = logoutButton.offsetHeight;
+
+                // Dapatkan ukuran viewport (layar browser)
+                const viewportWidth = window.innerWidth;
+                const viewportHeight = window.innerHeight;
+
+                // Tentukan posisi acak baru untuk tombol
+                // Pastikan tombol tidak keluar dari layar
+                const newTop = Math.random() * (viewportHeight - buttonHeight);
+                const newLeft = Math.random() * (viewportWidth - buttonWidth);
+
+                logoutButton.style.top = `${newTop}px`;
+                logoutButton.style.left = `${newLeft}px`;
+            }
+
+            // Tambahkan event listener. Setiap kali mouse mendekati tombol, panggil fungsi pindahTombolLogout()
+            logoutButton.addEventListener('mouseover', pindahTombolLogout);
+        }
     </script>
 
 </body>

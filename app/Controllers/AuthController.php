@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AdminModel; 
-use App\Models\TamuModel;  
+use App\Models\TamuModel; 
 
 class AuthController extends BaseController
 {
@@ -40,17 +40,17 @@ class AuthController extends BaseController
         }
 
         $email = $this->request->getPost('email');
-        $password = md5($this->request->getPost('password')); // Menggunakan md5() sesuai permintaan
+        $password = md5($this->request->getPost('password')); // Menggunakan md5() untuk login
 
         $admin = $this->adminModel->where('email', $email)->first();
         if ($admin) {
             if ($password === $admin['password']) { 
                 $sessionData = [
-                    'id'        => $admin['id_admin'],
-                    'nama'      => $admin['nama_admin'],
-                    'email'     => $admin['email'],
-                    'isLoggedIn'=> true,
-                    'role'      => 'admin'
+                    'id'         => $admin['id_admin'],
+                    'nama'       => $admin['nama_admin'],
+                    'email'      => $admin['email'],
+                    'isLoggedIn' => true,
+                    'role'       => 'admin'
                 ];
                 session()->set($sessionData);
                 log_message('debug', 'Admin login successful for email: ' . $email);
@@ -62,14 +62,14 @@ class AuthController extends BaseController
         if ($tamu) {
             if ($password === $tamu['password']) {
                 $sessionData = [
-                    'id_tamu'   => $tamu['id_tamu'], 
-                    'nama'      => $tamu['nama_tamu'],
-                    'email'     => $tamu['email'],
-                    'isLoggedIn'=> true,
-                    'role'      => 'tamu'
+                    'id_tamu'    => $tamu['id_tamu'], 
+                    'nama'       => $tamu['nama_tamu'],
+                    'email'      => $tamu['email'],
+                    'isLoggedIn' => true,
+                    'role'       => 'tamu'
                 ];
                 session()->set($sessionData);
-                log_message('debug', 'Tamu login successful for email: ' . $email . '. Session data set: ' . json_encode(session()->get()));
+                log_message('debug', 'Tamu login successful for email: ' . $email);
                 return redirect()->to('/tamu/dashboard')->with('success', 'Login berhasil!'); 
             }
         }
@@ -107,6 +107,7 @@ class AuthController extends BaseController
             'nama_tamu'  => $this->request->getPost('nama_tamu'),
             'no_hp_tamu' => $this->request->getPost('no_hp_tamu'),
             'email'      => $this->request->getPost('email'),
+            // DI SINI FUNGSI MD5 DIGUNAKAN SESUAI PERMINTAAN ANDA
             'password'   => md5($this->request->getPost('password')) 
         ];
 
