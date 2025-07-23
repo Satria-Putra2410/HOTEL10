@@ -239,13 +239,14 @@
 
         <!-- Enhanced Table -->
         <div class="glass-effect rounded-2xl overflow-hidden shadow-2xl scroll-float">
-            <div class="overflow-x-auto">
+            <div class="overflow-x-hidden">
                 <table class="min-w-full">
                     <thead>
                         <tr class="table-header">
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Nama Tamu</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tipe Kamar</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tgl Check-in</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Tgl Check-Out</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Status</th>
                             <th class="px-6 py-4 text-left text-xs font-bold text-gray-300 uppercase tracking-wider">Aksi</th>
                         </tr>
@@ -278,13 +279,19 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-semibold">
-                                        <?= esc($booking['tipe_kamar']) ?>
+                                        <?= esc($booking['id_reservasi']) ?>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center space-x-2">
                                         <i class='bx bx-calendar text-green-400 text-sm'></i>
                                         <span class="text-sm text-gray-300"><?= date('d M Y', strtotime($booking['tgl_masuk'])) ?></span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center space-x-2">
+                                        <i class='bx bx-calendar text-green-400 text-sm'></i>
+                                        <span class="text-sm text-gray-300"><?= date('d M Y', strtotime($booking['tgl_keluar'])) ?></span>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
