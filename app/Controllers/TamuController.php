@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\ReservasiModel;
 use App\Models\KamarModel;
 use App\Models\TamuModel;
 use CodeIgniter\API\ResponseTrait;
@@ -13,13 +12,11 @@ class TamuController extends BaseController
 {
     use ResponseTrait;
 
-    protected $reservasiModel;
     protected $kamarModel;
     protected $tamuModel;
 
     public function __construct()
     {
-        $this->reservasiModel = new ReservasiModel();
         $this->kamarModel = new KamarModel();
         $this->tamuModel = new TamuModel();
         helper(['form', 'url', 'session']);
@@ -34,9 +31,6 @@ class TamuController extends BaseController
         return view('tamu_dashboard', $data);
     }
 
-    /**
-     * Memeriksa ketersediaan kamar berdasarkan tanggal dan jumlah tamu (via AJAX).
-     */
     public function checkRoomAvailability()
     {
         if (!$this->request->isAJAX()) {
@@ -59,7 +53,7 @@ class TamuController extends BaseController
         $reservedKamarIds = $db->table('reservasi r')
             ->select('drk.id_kamar')
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
-            ->where('r.status !=', 'selesai')
+            ->where('r.status_pembayaran', 'settlement') // Hanya kamar yang lunas yang dianggap terisi
             ->groupStart()
                 ->where('r.tgl_masuk <', $tgl_keluar)
                 ->where('r.tgl_keluar >', $tgl_masuk)
@@ -79,10 +73,19 @@ class TamuController extends BaseController
     }
 
     /**
-     * Memproses pembuatan reservasi baru (via AJAX).
+     * Menginisiasi pembayaran dan membuat transaksi di Midtrans.
      */
-    public function createReservation()
+    public function initiatePayment()
     {
+        // Muat library Midtrans secara manual
+        require_once APPPATH . 'ThirdParty/midtrans-php/Midtrans.php';
+
+        // PERBAIKAN: Kunci API ditetapkan langsung di dalam kode (hardcoded)
+        \Midtrans\Config::$serverKey = "Mid-server-BZO_n2kDjkVcb_mFioJdRpyH";
+        \Midtrans\Config::$isProduction = false;
+        \Midtrans\Config::$isSanitized = true;
+        \Midtrans\Config::$is3ds = true;
+
         if (!$this->request->isAJAX()) {
             return $this->failUnauthorized('Akses tidak diizinkan.');
         }
@@ -97,85 +100,130 @@ class TamuController extends BaseController
         $tgl_masuk = $input['tgl_masuk'] ?? null;
         $tgl_keluar = $input['tgl_keluar'] ?? null;
         
-        // PERBAIKAN KUNCI: Ambil harga dari database, BUKAN dari input.
         $room = $this->kamarModel->find($id_kamar);
-        if (!$room) {
-            return $this->failNotFound('Kamar tidak ditemukan.');
+        $tamu = $this->tamuModel->find($id_tamu);
+
+        if (!$room || !$tamu) {
+            return $this->failNotFound('Data kamar atau tamu tidak ditemukan.');
         }
-        // Harga yang valid dan aman diambil dari sini.
+        
         $harga_kamar = $room['harga_kamar'];
-
-        // Validasi bahwa semua data yang diperlukan ada.
-        if (!$id_kamar || !$tgl_masuk || !$tgl_keluar || !$harga_kamar) {
+        if (!$id_kamar || !$tgl_masuk || !$tgl_keluar) {
             return $this->failValidationError('Data pemesanan tidak lengkap.');
-        }
-
-        $db = \Config\Database::connect();
-        $isBooked = $db->table('reservasi r')
-            ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
-            ->where('drk.id_kamar', $id_kamar) 
-            ->where('r.status !=', 'selesai') 
-            ->groupStart()
-                ->where('r.tgl_masuk <', $tgl_keluar)
-                ->where('r.tgl_keluar >', $tgl_masuk)
-            ->groupEnd()
-            ->countAllResults();
-
-        if ($isBooked > 0) {
-            return $this->failConflict('Kamar ini baru saja dipesan. Silakan pilih kamar lain.');
         }
 
         $checkin = new DateTime($tgl_masuk);
         $checkout = new DateTime($tgl_keluar);
         $numberOfNights = $checkout->diff($checkin)->days;
-
-        if ($numberOfNights <= 0) {
-            return $this->failValidationError('Durasi reservasi tidak valid.');
-        }
-
-        // Total harga dihitung menggunakan harga dari database.
         $total_harga_reservasi = $harga_kamar * $numberOfNights;
+
+        $order_id = 'HOTEL10-' . time() . '-' . $id_kamar;
+
+        $db = \Config\Database::connect();
+        $db->transStart();
 
         $reservasiData = [
             'tgl_masuk'             => $tgl_masuk,
             'tgl_keluar'            => $tgl_keluar,
             'total_harga_reservasi' => $total_harga_reservasi,
             'id_tamu'               => $id_tamu,
-            'status'                => 'Reserved' 
+            'status'                => 'Dibatalkan', // Status awal adalah Dibatalkan
+            'status_pembayaran'     => 'pending',
+            'midtrans_order_id'     => $order_id,
         ];
-
-        // Menggunakan metode transaksi otomatis dari CodeIgniter 4.
-        $db->transStart();
-
-        // 1. Insert ke tabel 'reservasi'
         $db->table('reservasi')->insert($reservasiData);
         $id_reservasi = $db->insertID();
 
-        // 2. Insert ke tabel 'detail_reservasi_kamar'
         $detailReservasiKamarData = [
             'jumlah_malam_kamar' => $numberOfNights,
             'id_reservasi'       => $id_reservasi,
             'id_kamar'           => $id_kamar
         ];
         $db->table('detail_reservasi_kamar')->insert($detailReservasiKamarData);
+        
+        $params = [
+            'transaction_details' => [
+                'order_id' => $order_id,
+                'gross_amount' => $total_harga_reservasi,
+            ],
+            'item_details' => [[
+                'id' => $id_kamar,
+                'price' => $harga_kamar,
+                'quantity' => $numberOfNights,
+                'name' => 'Menginap di ' . $room['tipe_kamar']
+            ]],
+            'customer_details' => [
+                'first_name' => $tamu['nama_tamu'],
+                'email' => $tamu['email'],
+                'phone' => $tamu['no_hp_tamu'],
+            ],
+        ];
 
-        // Menyelesaikan transaksi. CodeIgniter akan otomatis commit jika berhasil,
-        // atau rollback jika ada kesalahan.
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        $db->table('reservasi')->where('id_reservasi', $id_reservasi)->update(['snap_token' => $snapToken]);
+
         $db->transComplete();
 
         if ($db->transStatus() === false) {
-            // Jika transaksi gagal, catat error dan kirim respons error.
-            log_message('error', '[TamuController] Create Reservation Transaction Failed.');
-            return $this->failServerError('Terjadi kesalahan saat memproses pemesanan. Transaksi database gagal.');
-        } else {
-            // Jika transaksi berhasil.
-            return $this->respondCreated(['status' => 'success', 'message' => 'Pemesanan berhasil!', 'id_reservasi' => $id_reservasi]);
+            log_message('error', 'Gagal membuat transaksi untuk Order ID: ' . $order_id);
+            return $this->failServerError('Gagal memproses transaksi.');
+        }
+
+        return $this->respond(['status' => 'success', 'snap_token' => $snapToken]);
+    }
+
+    /**
+     * Halaman tujuan setelah pembayaran, untuk memeriksa status secara manual.
+     */
+    public function paymentFinish()
+    {
+        // Muat library dan atur kunci
+        require_once APPPATH . 'ThirdParty/midtrans-php/Midtrans.php';
+        \Midtrans\Config::$serverKey = "Mid-server-BZO_n2kDjkVcb_mFioJdRpyH";
+        \Midtrans\Config::$isProduction = false;
+
+        // Ambil order_id dari URL
+        $order_id = $this->request->getGet('order_id');
+        if (!$order_id) {
+            return redirect()->to('tamu/riwayat-reservasi')->with('error', 'Order ID tidak ditemukan.');
+        }
+
+        try {
+            // Minta status transaksi ke Midtrans
+            $status = \Midtrans\Transaction::status($order_id);
+
+            $db = \Config\Database::connect();
+            $transaction_status = $status->transaction_status;
+            $fraud_status = $status->fraud_status ?? null;
+
+            $updateData = [];
+
+            // Logika update status reservasi DAN pembayaran
+            if (($transaction_status == 'capture' && $fraud_status == 'accept') || $transaction_status == 'settlement') {
+                $updateData['status_pembayaran'] = 'settlement';
+                $updateData['status'] = 'Reserved'; // Pembayaran berhasil, status menjadi Reserved
+            } else if ($transaction_status == 'pending') {
+                $updateData['status_pembayaran'] = 'pending';
+                $updateData['status'] = 'Dibatalkan'; // Tetap dibatalkan selagi pending
+            } else if ($transaction_status == 'expire' || $transaction_status == 'cancel' || $transaction_status == 'deny') {
+                $updateData['status_pembayaran'] = $transaction_status;
+                $updateData['status'] = 'Dibatalkan'; // Pembayaran gagal, status tetap Dibatalkan
+            }
+
+            // Update database jika ada perubahan status
+            if (!empty($updateData)) {
+                $db->table('reservasi')->where('midtrans_order_id', $order_id)->update($updateData);
+            }
+
+            return redirect()->to('tamu/riwayat-reservasi')->with('success', 'Status pembayaran telah diperbarui.');
+
+        } catch (\Exception $e) {
+            log_message('error', 'Midtrans status check error: ' . $e->getMessage());
+            return redirect()->to('tamu/riwayat-reservasi')->with('error', 'Gagal memeriksa status pembayaran: ' . $e->getMessage());
         }
     }
     
-    /**
-     * Menampilkan halaman Riwayat Reservasi untuk Tamu.
-     */
     public function riwayatReservasi()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
@@ -185,9 +233,6 @@ class TamuController extends BaseController
         return view('riwayat-reservasi', $data);
     }
 
-    /**
-     * Menyediakan data riwayat reservasi sebagai API untuk JavaScript.
-     */
     public function getApiRiwayat()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
@@ -200,13 +245,14 @@ class TamuController extends BaseController
         }
 
         try {
-            $data = $this->reservasiModel
+            $db = \Config\Database::connect();
+            $data = $db->table('reservasi')
                          ->select('reservasi.*, kamar.tipe_kamar, kamar.nomor_kamar')
                          ->join('detail_reservasi_kamar', 'detail_reservasi_kamar.id_reservasi = reservasi.id_reservasi', 'left')
                          ->join('kamar', 'kamar.id_kamar = detail_reservasi_kamar.id_kamar', 'left')
                          ->where('reservasi.id_tamu', $id_tamu)
-                         ->orderBy('reservasi.tgl_masuk', 'DESC')
-                         ->findAll();
+                         ->orderBy('reservasi.id_reservasi', 'DESC') // Urutkan berdasarkan ID terbaru
+                         ->get()->getResultArray();
 
             return $this->respond($data);
         } catch (\Exception $e) {
@@ -215,9 +261,6 @@ class TamuController extends BaseController
         }
     }
 
-    /**
-     * Menampilkan halaman edit profil tamu.
-     */
     public function editProfil()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
@@ -237,9 +280,6 @@ class TamuController extends BaseController
         return view('tamu_edit_profil', $data);
     }
 
-    /**
-     * Memproses update profil tamu.
-     */
     public function updateProfil()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {

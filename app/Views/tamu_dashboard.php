@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dashboard Tamu</title>
+    <!-- 1. Tambahkan script Snap.js dari Midtrans -->
+    <script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="<?= (new \Config\Midtrans())->clientKey ?>"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@400;700;900&display=swap');
@@ -370,10 +374,10 @@
                                 <img src="<?= base_url('icon/Digital_Glyph_Green.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://x.com" target="_blank">
-                                <img src="<?= base_url('icon/logo-white.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
+                                <img src="<?= base_url('icon/logo-white.png') ?>" alt="X" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                             <a href="https://facebook.com" target="_blank">
-                                <img src="<?= base_url('icon/Facebook_Logo_Primary.png') ?>" alt="WhatsApp" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
+                                <img src="<?= base_url('icon/Facebook_Logo_Primary.png') ?>" alt="Facebook" class="w-8 h-8 hover:opacity-80 hover:animate-bounce">
                             </a>
                         </div>
                     </div>
@@ -420,6 +424,10 @@
             const noRoomsFound = document.getElementById('noRoomsFound');
             const loadingIndicator = document.getElementById('loadingIndicator');
 
+            // 2. Deklarasikan variabel tanggal di scope yang lebih tinggi
+            let checkinDate = '';
+            let checkoutDate = '';
+
             // Set min date for check-in to today
             const today = new Date();
             const tomorrow = new Date(today);
@@ -432,14 +440,14 @@
 
             checkinDateInput.addEventListener('change', () => {
                 if (checkinDateInput.value) {
-                    const checkinDate = new Date(checkinDateInput.value);
-                    const minCheckoutDate = new Date(checkinDate);
+                    const selectedCheckinDate = new Date(checkinDateInput.value);
+                    const minCheckoutDate = new Date(selectedCheckinDate);
                     minCheckoutDate.setDate(minCheckoutDate.getDate() + 1);
-                    checkoutDateInput.min = minCheckoutDate.toISOString().split('T')[0];
+                    const minCheckoutISO = minCheckoutDate.toISOString().split('T')[0];
+                    checkoutDateInput.min = minCheckoutISO;
                     
-                    // If checkout date is before or same as new checkin date, reset it
-                    if (checkoutDateInput.value && new Date(checkoutDateInput.value) <= checkinDate) {
-                        checkoutDateInput.value = minCheckoutDate.toISOString().split('T')[0];
+                    if (checkoutDateInput.value && new Date(checkoutDateInput.value) <= selectedCheckinDate) {
+                        checkoutDateInput.value = minCheckoutISO;
                     }
                 } else {
                     checkoutDateInput.min = tomorrowISO;
@@ -450,12 +458,13 @@
             bookingForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                roomListDiv.innerHTML = ''; // Clear previous results
-                noRoomsFound.classList.add('hidden'); // Hide "no rooms found" message
-                loadingIndicator.classList.remove('hidden'); // Show loading indicator
+                roomListDiv.innerHTML = '';
+                noRoomsFound.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
 
-                const checkinDate = checkinDateInput.value;
-                const checkoutDate = checkoutDateInput.value;
+                // 3. Isi nilai variabel tanggal saat form disubmit
+                checkinDate = checkinDateInput.value;
+                checkoutDate = checkoutDateInput.value;
                 const numGuests = document.getElementById('num_guests').value;
 
                 if (!checkinDate || !checkoutDate || !numGuests) {
@@ -464,7 +473,6 @@
                     return;
                 }
 
-                // Client-side date validation
                 if (new Date(checkinDate) >= new Date(checkoutDate)) {
                     alert('Tanggal Check-out harus setelah Tanggal Check-in.');
                     loadingIndicator.classList.add('hidden');
@@ -486,7 +494,7 @@
                     });
 
                     const data = await response.json();
-                    loadingIndicator.classList.add('hidden'); // Hide loading indicator
+                    loadingIndicator.classList.add('hidden');
 
                     if (data.status === 'success' && data.rooms.length > 0) {
                         data.rooms.forEach(room => {
@@ -502,26 +510,27 @@
                                             data-id-kamar="${room.id_kamar}"
                                             data-tipe-kamar="${room.tipe_kamar}"
                                             data-nomor-kamar="${room.nomor_kamar}">
-                                        Pesan Kamar Ini
+                                        Pesan & Bayar
                                     </button>
                                 </div>
                             `;
                             roomListDiv.insertAdjacentHTML('beforeend', roomCard);
                         });
 
-                        // Add event listeners for booking buttons
                         document.querySelectorAll('.book-room-btn').forEach(button => {
                             button.addEventListener('click', async (event) => {
                                 const idKamar = event.target.dataset.idKamar;
                                 const tipeKamar = event.target.dataset.tipeKamar;
                                 const nomorKamar = event.target.dataset.nomorKamar;
 
+                                // 4. Gunakan variabel tanggal yang sudah ada di scope ini
                                 if (!confirm(`Anda yakin ingin memesan kamar ${tipeKamar} No. ${nomorKamar} dari ${checkinDate} sampai ${checkoutDate}?`)) {
                                     return;
                                 }
 
                                 try {
-                                    const reservationResponse = await fetch('<?= base_url('tamu/create-reservation') ?>', {
+                                    // 5. Ubah endpoint ke 'initiate-payment'
+                                    const reservationResponse = await fetch('<?= base_url('tamu/initiate-payment') ?>', {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
@@ -536,23 +545,38 @@
 
                                     const reservationData = await reservationResponse.json();
 
+                                    // 6. Ganti logika alert dengan snap.pay()
                                     if (reservationResponse.ok && reservationData.status === 'success') {
-                                        alert('Pemesanan berhasil! ID Reservasi Anda: ' + reservationData.id_reservasi);
-                                        window.location.reload(); // Reload dashboard to reflect changes
+                                        snap.pay(reservationData.snap_token, {
+                                            onSuccess: function(result){
+                                                window.location.href = "<?= base_url('tamu/payment-finish') ?>?order_id=" + result.order_id;
+                                            },
+                                            onPending: function(result){
+                                                window.location.href = "<?= base_url('tamu/payment-finish') ?>?order_id=" + result.order_id;
+                                            },
+                                            onError: function(result){
+                                                alert("Pembayaran gagal!");
+                                                console.log(result);
+                                            },
+                                            onClose: function(){
+                                                alert('Memeriksa status pembayaran terakhir...');
+                                                // Arahkan ke riwayat untuk melihat status pending
+                                                window.location.href = "<?= base_url('tamu/riwayat-reservasi') ?>";
+                                            }
+                                        });
                                     } else {
-                                        // Display server-side error message
-                                        alert('Pemesanan gagal: ' + (reservationData.message || 'Terjadi kesalahan pada server.'));
+                                        alert('Gagal memulai pembayaran: ' + (reservationData.message || 'Terjadi kesalahan pada server.'));
                                     }
 
                                 } catch (error) {
-                                    console.error('Error during reservation:', error);
-                                    alert('Terjadi kesalahan saat memesan kamar.');
+                                    console.error('Error during payment initiation:', error);
+                                    alert('Terjadi kesalahan saat memulai pembayaran.');
                                 }
                             });
                         });
 
                     } else {
-                        noRoomsFound.classList.remove('hidden'); // Show "no rooms found"
+                        noRoomsFound.classList.remove('hidden');
                     }
 
                 } catch (error) {
@@ -565,4 +589,4 @@
     </script>
 
 </body>
-</ht
+</html>
