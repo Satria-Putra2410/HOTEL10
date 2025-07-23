@@ -6,7 +6,7 @@
     <title><?= esc($title ?? 'Tambah Kamar Baru') ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans">
+<body class="bg-gray-900 text-gray-100 font-sans">
     
     <?= $this->include('layouts/admin_navbar') ?>
 
@@ -25,42 +25,42 @@
             </div>
         <?php endif; ?>
 
-        <div class="bg-white p-8 rounded-lg shadow-md">
+        <div class="bg-gray-800 p-8 rounded-lg shadow-md">
             <form action="<?= base_url('admin/kamar/store') ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Kolom Kiri -->
                     <div>
                         <div class="mb-4">
-                            <label for="nomor_kamar" class="block text-gray-700 text-sm font-bold mb-2">Nomor Kamar</label>
-                            <input type="text" name="nomor_kamar" id="nomor_kamar" value="<?= old('nomor_kamar') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="nomor_kamar" class="block text-gray-100 text-sm font-bold mb-2">Nomor Kamar</label>
+                            <input type="text" name="nomor_kamar" id="nomor_kamar" value="<?= old('nomor_kamar') ?>" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-4">
-                            <label for="tipe_kamar" class="block text-gray-700 text-sm font-bold mb-2">Tipe Kamar</label>
-                            <input type="text" name="tipe_kamar" id="tipe_kamar" value="<?= old('tipe_kamar') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="tipe_kamar" class="block text-gray-100 text-sm font-bold mb-2">Tipe Kamar</label>
+                            <input type="text" name="tipe_kamar" id="tipe_kamar" value="<?= old('tipe_kamar') ?>" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-4">
-                            <label for="harga_kamar" class="block text-gray-700 text-sm font-bold mb-2">Harga / Malam</label>
-                            <input type="number" name="harga_kamar" id="harga_kamar" value="<?= old('harga_kamar') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="harga_kamar" class="block text-gray-100 text-sm font-bold mb-2">Harga / Malam</label>
+                            <input type="number" min="1" name="harga_kamar" id="harga_kamar" value="<?= old('harga_kamar') ?>" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-4">
-                            <label for="jenis_ranjang" class="block text-gray-700 text-sm font-bold mb-2">Jenis Ranjang</label>
-                            <input type="text" name="jenis_ranjang" id="jenis_ranjang" placeholder="Contoh: 1 King Bed" value="<?= old('jenis_ranjang') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="jenis_ranjang" class="block text-gray-100 text-sm font-bold mb-2">Jenis Ranjang</label>
+                            <input type="text" name="jenis_ranjang" id="jenis_ranjang" placeholder="Contoh: 1 King Bed" value="<?= old('jenis_ranjang') ?>" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="mb-4">
-                            <label for="jumlah_tamu" class="block text-gray-700 text-sm font-bold mb-2">Kapasitas Tamu</label>
-                            <input type="number" name="jumlah_tamu" id="jumlah_tamu" value="<?= old('jumlah_tamu') ?>" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="jumlah_tamu" class="block text-gray-100 text-sm font-bold mb-2">Kapasitas Tamu</label>
+                            <input type="number" min="1" name="jumlah_tamu" id="jumlah_tamu" value="<?= old('jumlah_tamu') ?>" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
                     <!-- Kolom Kanan -->
                     <div>
                         <div class="mb-4">
-                            <label for="deskripsi" class="block text-gray-700 text-sm font-bold mb-2">Deskripsi</label>
-                            <textarea name="deskripsi" id="deskripsi" rows="5" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"><?= old('deskripsi') ?></textarea>
+                            <label for="deskripsi" class="block text-gray-100 text-sm font-bold mb-2">Deskripsi</label>
+                            <textarea name="deskripsi" id="deskripsi" rows="5" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline"><?= old('deskripsi') ?></textarea>
                         </div>
                         <div class="mb-4">
-                            <label for="foto" class="block text-gray-700 text-sm font-bold mb-2">Foto Kamar</label>
-                            <input type="file" name="foto" id="foto" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label for="foto" class="block text-gray-100 text-sm font-bold mb-2">Foto Kamar</label>
+                            <input type="file" name="foto" id="foto" class="bg-transparent shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                     </div>
                 </div>

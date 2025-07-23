@@ -279,7 +279,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full text-xs font-semibold">
-                                        <?= esc($booking['id_reservasi']) ?>
+                                        <?= esc($booking['tipe_kamar']) ?>
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">

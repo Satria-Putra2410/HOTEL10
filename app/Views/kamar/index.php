@@ -96,9 +96,7 @@
                                     <a href="<?= base_url('admin/kamar/' . $room['id_kamar'] . '/delete') ?>"
                                        class="inline-block bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-sm"
                                        onclick="return confirm('PERINGATAN: Anda akan menghapus TIPE KAMAR \'<?= esc($room['tipe_kamar']) ?>\' dan SEMUA unit kamarnya. Lanjutkan?')">Hapus Tipe</a>
-                                       
-                                    <a href="<?= base_url('admin/kamar/' . $room['id_kamar']) ?>" class="inline-block bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm">Detail</a>
-                                </td>
+                                    </td>
                             </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
