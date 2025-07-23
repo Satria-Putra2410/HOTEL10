@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\KamarModel;
-use App\Models\UnitKamarModel;
-use App\Models\DetailReservasiKamarModel;
+use App\Models\DetailReservasiKamarModel; // Diperlukan untuk pengecekan delete
 
 class KamarController extends BaseController
 {
@@ -14,14 +13,11 @@ class KamarController extends BaseController
      */
     public function index()
     {
-        $unitKamarModel = new UnitKamarModel();
+        $kamarModel = new KamarModel();
         
         $data = [
             'title' => 'Manajemen Kamar',
-            'rooms' => $unitKamarModel
-                ->select('unit_kamar.id_unit_kamar, unit_kamar.nomor_kamar, kamar.*')
-                ->join('kamar', 'kamar.id_kamar = unit_kamar.id_kamar', 'left')
-                ->findAll(),
+            'rooms' => $kamarModel->findAll(),
         ];
         return view('kamar/index', $data);
     }
@@ -33,86 +29,82 @@ class KamarController extends BaseController
     {
         $data = [
             'title' => 'Tambah Kamar Baru',
+            'validation' => \Config\Services::validation()
         ];
         return view('kamar/create', $data);
     }
 
     /**
-     * ====================================================================
-     * FUNGSI STORE YANG DIPERBARUI DENGAN LOGIKA YANG LEBIH AMAN
-     * ====================================================================
+     * Menyimpan data kamar baru ke database.
      */
     public function store()
     {
         $kamarModel = new KamarModel();
-        $unitKamarModel = new UnitKamarModel();
         
-        // PERBAIKAN: Validasi semua input dari form terlebih dahulu
-        $rules = $kamarModel->getValidationRules(); 
-        // Tambahkan aturan untuk nomor_kamar secara manual jika tidak ada di model Kamar
-        $rules['nomor_kamar'] = 'required|alpha_numeric_punct|max_length[20]';
-
-        if (!$this->validate($rules)) {
+        // 1. Validasi input menggunakan aturan dari KamarModel.
+        if (!$this->validate($kamarModel->getValidationRules())) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
         
+        // 2. Proses upload file.
         $foto = $this->request->getFile('foto');
-        $namaFoto = $foto->getRandomName();
-        
-        if (!$foto->move('uploads/kamar/', $namaFoto)) {
-            return redirect()->back()->withInput()->with('error', 'Gagal mengupload file foto. Pastikan folder `uploads/kamar` dapat ditulis.');
+        if (!$foto->isValid() || $foto->hasMoved()) {
+            return redirect()->back()->withInput()->with('errors', ['foto' => 'File foto tidak valid atau sudah dipindahkan.']);
         }
 
+        $namaFoto = $foto->getRandomName();
+        $uploadPath = FCPATH . 'uploads/kamar/'; // FCPATH menunjuk ke folder 'public'
+
+        // Buat direktori jika belum ada.
+        if (!is_dir($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        if (!$foto->move($uploadPath, $namaFoto)) {
+            return redirect()->back()->withInput()->with('error', 'Gagal mengupload file foto.');
+        }
+
+        // 3. Gunakan transaksi database untuk keamanan data.
         $db = \Config\Database::connect();
         $db->transBegin();
 
         try {
-            // Siapkan data HANYA untuk tabel 'kamar'
             $kamarData = [
-                'tipe_kamar'    => $this->request->getPost('tipe_kamar'),
-                'harga_kamar'   => $this->request->getPost('harga_kamar'),
+                'tipe_kamar'  => $this->request->getPost('tipe_kamar'),
+                'harga_kamar' => $this->request->getPost('harga_kamar'),
                 'jenis_ranjang' => $this->request->getPost('jenis_ranjang'),
-                'jumlah_tamu'   => $this->request->getPost('jumlah_tamu'),
-                'deskripsi'     => $this->request->getPost('deskripsi'),
-                'foto'          => $namaFoto,
+                'jumlah_tamu' => $this->request->getPost('jumlah_tamu'),
+                'deskripsi'   => $this->request->getPost('deskripsi'),
+                'nomor_kamar' => $this->request->getPost('nomor_kamar'),
+                'foto'        => $namaFoto,
             ];
             
-            // PERBAIKAN: Lewati validasi model saat insert, karena sudah divalidasi di controller
-            $id_kamar_baru = $kamarModel->skipValidation(true)->insert($kamarData);
-
-            if ($id_kamar_baru === false) {
-                // Ambil error dari model jika ada
-                $errors = $kamarModel->errors();
-                throw new \Exception('Gagal menyimpan data tipe kamar: ' . implode(', ', $errors));
+            // PERBAIKAN KUNCI: Lewati validasi di model karena sudah divalidasi di controller.
+            // Ini mencegah error validasi 'uploaded[foto]' yang gagal setelah file dipindahkan.
+            if (!$kamarModel->skipValidation(true)->insert($kamarData)) {
+                throw new \Exception('Gagal menyimpan data ke database: ' . implode(', ', $kamarModel->errors()));
             }
 
-            // Siapkan dan simpan data untuk tabel 'unit_kamar'
-            $unitKamarData = [
-                'id_kamar'    => $id_kamar_baru,
-                'nomor_kamar' => $this->request->getPost('nomor_kamar'),
-            ];
-            $unitKamarModel->insert($unitKamarData);
-
             $db->transCommit();
-
-            return redirect()->to('/admin/kamar')->with('success', 'Kamar baru dan unitnya berhasil ditambahkan.');
+            return redirect()->to('/admin/kamar')->with('success', 'Kamar baru berhasil ditambahkan.');
 
         } catch (\Exception $e) {
             $db->transRollback();
 
-            if (file_exists('uploads/kamar/' . $namaFoto)) {
-                unlink('uploads/kamar/' . $namaFoto);
+            // Hapus file yang sudah terupload jika terjadi error database.
+            if (file_exists($uploadPath . $namaFoto)) {
+                unlink($uploadPath . $namaFoto);
             }
 
-            log_message('error', 'Gagal menyimpan kamar baru: ' . $e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data ke database: ' . $e->getMessage());
+            log_message('error', '[KamarController] Store Error: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
     }
 
     /**
-     * Menampilkan detail satu kamar berdasarkan ID.
+     * Menampilkan form untuk mengedit kamar yang sudah ada.
      */
-    public function show($id)
+    public function edit($id)
     {
         $kamarModel = new KamarModel();
         $room = $kamarModel->find($id);
@@ -122,127 +114,84 @@ class KamarController extends BaseController
         }
 
         $data = [
-            'title' => 'Detail Kamar',
-            'room'  => $room,
-        ];
-        return view('kamar/show', $data);
-    }
-
-    /**
-     * Menampilkan form untuk mengedit kamar yang sudah ada.
-     */
-    public function edit($id)
-    {
-        $kamarModel = new KamarModel();
-        $unitKamarModel = new UnitKamarModel();
-
-        $room = $kamarModel->find($id);
-        if (!$room) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Tipe Kamar dengan ID ' . $id . ' tidak ditemukan.');
-        }
-
-        $unit = $unitKamarModel->where('id_kamar', $id)->first();
-        $room['nomor_kamar'] = $unit ? $unit['nomor_kamar'] : 'N/A';
-        $room['id_unit_kamar'] = $unit ? $unit['id_unit_kamar'] : null;
-
-        $data = [
             'title' => 'Edit Kamar',
             'room'  => $room,
+            'validation' => \Config\Services::validation()
         ];
         return view('kamar/edit', $data);
     }
 
     /**
-     * ====================================================================
-     * FUNGSI UPDATE YANG DIPERBARUI
-     * ====================================================================
-     * Memperbarui data tipe kamar dan unit kamar terkait.
+     * Memperbarui data kamar di database.
      */
-    public function update($id) // $id di sini adalah id_kamar
+    public function update($id)
     {
         $kamarModel = new KamarModel();
-        $unitKamarModel = new UnitKamarModel();
 
-        $rules = $kamarModel->getValidationRules(['except' => ['foto']]);
-        $rules['nomor_kamar'] = 'required|alpha_numeric_punct|max_length[20]';
+        $room = $kamarModel->find($id);
+        if (!$room) {
+            return redirect()->to('/admin/kamar')->with('error', 'Data kamar tidak ditemukan.');
+        }
 
-        if (!$this->validate($rules)) {
+        // Gunakan aturan validasi untuk update dari model.
+        if (!$this->validate($kamarModel->getUpdateValidationRules())) {
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        $db = \Config\Database::connect();
-        $db->transBegin();
+        $kamarData = [
+            'tipe_kamar'  => $this->request->getPost('tipe_kamar'),
+            'harga_kamar' => $this->request->getPost('harga_kamar'),
+            'jenis_ranjang' => $this->request->getPost('jenis_ranjang'),
+            'jumlah_tamu' => $this->request->getPost('jumlah_tamu'),
+            'deskripsi'   => $this->request->getPost('deskripsi'),
+            'nomor_kamar' => $this->request->getPost('nomor_kamar'),
+        ];
+        
+        $foto = $this->request->getFile('foto');
+        if ($foto && $foto->isValid() && !$foto->hasMoved()) {
+            $namaFoto = $foto->getRandomName();
+            $uploadPath = FCPATH . 'uploads/kamar/';
 
-        try {
-            // 1. Update data di tabel 'kamar'
-            $kamarData = [
-                'tipe_kamar'    => $this->request->getPost('tipe_kamar'),
-                'harga_kamar'   => $this->request->getPost('harga_kamar'),
-                'jenis_ranjang' => $this->request->getPost('jenis_ranjang'),
-                'jumlah_tamu'   => $this->request->getPost('jumlah_tamu'),
-                'deskripsi'     => $this->request->getPost('deskripsi'),
-            ];
-            $kamarModel->skipValidation(true)->update($id, $kamarData);
-
-            // 2. Update data di tabel 'unit_kamar'
-            $id_unit_kamar = $this->request->getPost('id_unit_kamar');
-            if ($id_unit_kamar) {
-                $unitKamarData = [
-                    'nomor_kamar' => $this->request->getPost('nomor_kamar'),
-                ];
-                $unitKamarModel->update($id_unit_kamar, $unitKamarData);
+            if ($foto->move($uploadPath, $namaFoto)) {
+                if ($room['foto'] && file_exists($uploadPath . $room['foto'])) {
+                    unlink($uploadPath . $room['foto']);
+                }
+                $kamarData['foto'] = $namaFoto;
             }
-
-            $db->transCommit();
+        }
+        
+        // PERBAIKAN KUNCI: Lewati validasi juga saat update.
+        if ($kamarModel->skipValidation(true)->update($id, $kamarData)) {
             return redirect()->to('/admin/kamar')->with('success', 'Data kamar berhasil diperbarui.');
-
-        } catch (\Exception $e) {
-            $db->transRollback();
-            log_message('error', 'Gagal memperbarui kamar: ' . $e->getMessage());
+        } else {
             return redirect()->back()->withInput()->with('error', 'Gagal memperbarui data.');
         }
     }
 
     /**
-     * Menghapus data TIPE kamar dan SEMUA UNIT kamar yang terkait.
+     * Menghapus data kamar dari database.
      */
     public function delete($id)
     {
         $kamarModel = new KamarModel();
-        $unitKamarModel = new UnitKamarModel();
         $detailReservasiKamarModel = new DetailReservasiKamarModel();
 
-        $unitsToDelete = $unitKamarModel->where('id_kamar', $id)->findAll();
-        $unitIds = array_column($unitsToDelete, 'id_unit_kamar');
-
-        if (!empty($unitIds)) {
-            $isUsed = $detailReservasiKamarModel->whereIn('id_kamar', $unitIds)->first();
-            if ($isUsed) {
-                return redirect()->to('/admin/kamar')->with('error', 'Gagal! Tipe kamar ini tidak dapat dihapus karena salah satu unitnya memiliki riwayat reservasi.');
-            }
+        $isUsed = $detailReservasiKamarModel->where('id_kamar', $id)->first();
+        if ($isUsed) {
+            return redirect()->to('/admin/kamar')->with('error', 'Gagal! Kamar ini tidak dapat dihapus karena memiliki riwayat reservasi.');
         }
 
         $room = $kamarModel->find($id);
         if (!$room) {
-             throw new \CodeIgniter\Exceptions\PageNotFoundException('Tipe Kamar dengan ID ' . $id . ' tidak ditemukan.');
+            return redirect()->to('/admin/kamar')->with('error', 'Data kamar tidak ditemukan.');
         }
-
-        $db = \Config\Database::connect();
-        $db->transBegin();
-
-        try {
-            if (!empty($unitIds)) {
-                $unitKamarModel->delete($unitIds);
+        
+        if ($kamarModel->delete($id)) {
+            if ($room['foto'] && file_exists(FCPATH . 'uploads/kamar/' . $room['foto'])) {
+                unlink(FCPATH . 'uploads/kamar/' . $room['foto']);
             }
-            $kamarModel->delete($id);
-            $db->transCommit();
-
-            if ($room['foto'] && file_exists('uploads/kamar/' . $room['foto'])) {
-                unlink('uploads/kamar/' . $room['foto']);
-            }
-            return redirect()->to('/admin/kamar')->with('success', 'Tipe kamar dan semua unitnya berhasil dihapus.');
-        } catch (\Exception $e) {
-            $db->transRollback();
+            return redirect()->to('/admin/kamar')->with('success', 'Kamar berhasil dihapus.');
+        } else {
             return redirect()->to('/admin/kamar')->with('error', 'Terjadi kesalahan saat menghapus data.');
         }
     }

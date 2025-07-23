@@ -2,12 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use App\Models\ReservasiModel;
 use App\Models\KamarModel;
-use App\Models\UnitKamarModel;
 use App\Models\TamuModel;
+use App\Models\DetailReservasiKamarModel; // Diperlukan untuk getApiRiwayat
 use CodeIgniter\API\ResponseTrait;
-use DateTime; // Pastikan class DateTime di-import
+use DateTime;
 
 class TamuController extends BaseController
 {
@@ -15,14 +16,12 @@ class TamuController extends BaseController
 
     protected $reservasiModel;
     protected $kamarModel;
-    protected $unitKamarModel;
     protected $tamuModel;
 
     public function __construct()
     {
         $this->reservasiModel = new ReservasiModel();
         $this->kamarModel = new KamarModel();
-        $this->unitKamarModel = new UnitKamarModel();
         $this->tamuModel = new TamuModel();
         helper(['form', 'url', 'session']);
     }
@@ -58,8 +57,9 @@ class TamuController extends BaseController
         }
 
         $db = \Config\Database::connect();
-        $reservedUnitIds = $db->table('reservasi r')
-            ->select('drk.id_kamar as id_unit_kamar')
+        // Perubahan: Select 'id_kamar' langsung dari detail reservasi
+        $reservedKamarIds = $db->table('reservasi r')
+            ->select('drk.id_kamar') // Tidak ada lagi id_unit_kamar
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
             ->where('r.status !=', 'selesai')
             ->groupStart()
@@ -68,15 +68,14 @@ class TamuController extends BaseController
             ->groupEnd()
             ->get()->getResultArray();
 
-        $reservedIds = array_column($reservedUnitIds, 'id_unit_kamar');
+        $reservedIds = array_column($reservedKamarIds, 'id_kamar');
 
-        $availableRooms = $this->unitKamarModel
-            ->select('unit_kamar.id_unit_kamar, unit_kamar.nomor_kamar, kamar.id_kamar, kamar.tipe_kamar, kamar.harga_kamar, kamar.jenis_ranjang, kamar.jumlah_tamu, kamar.foto, kamar.deskripsi')
-            ->join('kamar', 'kamar.id_kamar = unit_kamar.id_kamar')
-            ->where('kamar.jumlah_tamu >=', $jumlah_tamu);
+        // Perubahan: Query langsung ke KamarModel
+        $availableRooms = $this->kamarModel->where('jumlah_tamu >=', $jumlah_tamu);
             
         if (!empty($reservedIds)) {
-            $availableRooms->whereNotIn('unit_kamar.id_unit_kamar', $reservedIds);
+            // Perubahan: Pengecekan pada kolom 'id_kamar'
+            $availableRooms->whereNotIn('id_kamar', $reservedIds);
         }
             
         $rooms = $availableRooms->findAll();
@@ -98,19 +97,27 @@ class TamuController extends BaseController
         }
 
         $input = $this->request->getJSON(true);
-        $id_unit_kamar = $input['id_unit_kamar'] ?? null;
+        // Perubahan: Menggunakan id_kamar, bukan id_unit_kamar
+        $id_kamar = $input['id_kamar'] ?? null;
         $tgl_masuk = $input['tgl_masuk'] ?? null;
         $tgl_keluar = $input['tgl_keluar'] ?? null;
-        $harga_kamar = $input['harga_kamar'] ?? null;
+        
+        // Ambil harga dari database untuk keamanan, bukan dari input
+        $room = $this->kamarModel->find($id_kamar);
+        if (!$room) {
+            return $this->failNotFound('Kamar tidak ditemukan.');
+        }
+        $harga_kamar = $room['harga_kamar'];
 
-        if (!$id_unit_kamar || !$tgl_masuk || !$tgl_keluar || !$harga_kamar) {
+        if (!$id_kamar || !$tgl_masuk || !$tgl_keluar || !$harga_kamar) {
             return $this->failValidationError('Data pemesanan tidak lengkap.');
         }
 
         $db = \Config\Database::connect();
+        // Perubahan: Pengecekan ke 'drk.id_kamar'
         $isBooked = $db->table('reservasi r')
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
-            ->where('drk.id_kamar', $id_unit_kamar) 
+            ->where('drk.id_kamar', $id_kamar) 
             ->where('r.status !=', 'selesai') 
             ->groupStart()
                 ->where('r.tgl_masuk <', $tgl_keluar)
@@ -133,11 +140,11 @@ class TamuController extends BaseController
         $total_harga_reservasi = $harga_kamar * $numberOfNights;
 
         $reservasiData = [
-            'tgl_masuk' => $tgl_masuk,
-            'tgl_keluar' => $tgl_keluar,
+            'tgl_masuk'             => $tgl_masuk,
+            'tgl_keluar'            => $tgl_keluar,
             'total_harga_reservasi' => $total_harga_reservasi,
-            'id_tamu' => $id_tamu,
-            'status' => 'Reserved' 
+            'id_tamu'               => $id_tamu,
+            'status'                => 'Reserved' 
         ];
 
         $db->transBegin();
@@ -147,8 +154,8 @@ class TamuController extends BaseController
 
             $detailReservasiKamarData = [
                 'jumlah_malam_kamar' => $numberOfNights,
-                'id_reservasi' => $id_reservasi,
-                'id_kamar' => $id_unit_kamar 
+                'id_reservasi'       => $id_reservasi,
+                'id_kamar'           => $id_kamar // Perubahan: Menggunakan id_kamar
             ];
             $db->table('detail_reservasi_kamar')->insert($detailReservasiKamarData);
 
@@ -160,16 +167,9 @@ class TamuController extends BaseController
             return $this->failServerError('Terjadi kesalahan saat memproses pemesanan: ' . $e->getMessage());
         }
     }
-
-    /**
-     * ====================================================================
-     * FUNGSI UNTUK RIWAYAT RESERVASI
-     * ====================================================================
-     */
-
+    
     /**
      * Menampilkan halaman Riwayat Reservasi untuk Tamu.
-     * Fungsi ini hanya memuat view, data akan diambil oleh JavaScript.
      */
     public function riwayatReservasi()
     {
@@ -195,7 +195,16 @@ class TamuController extends BaseController
         }
 
         try {
-            $data = $this->reservasiModel->getRiwayatByTamu($id_tamu);
+            // Pastikan method getRiwayatByTamu di ReservasiModel sudah benar
+            // dan melakukan join ke tabel kamar, bukan unit_kamar
+            $data = $this->reservasiModel
+                         ->select('reservasi.*, kamar.tipe_kamar, kamar.nomor_kamar')
+                         ->join('detail_reservasi_kamar', 'detail_reservasi_kamar.id_reservasi = reservasi.id_reservasi', 'left')
+                         ->join('kamar', 'kamar.id_kamar = detail_reservasi_kamar.id_kamar', 'left')
+                         ->where('reservasi.id_tamu', $id_tamu)
+                         ->orderBy('reservasi.tgl_masuk', 'DESC')
+                         ->findAll();
+
             return $this->respond($data);
         } catch (\Exception $e) {
             log_message('error', '[TamuController] Get API Riwayat Error: ' . $e->getMessage());
@@ -204,11 +213,8 @@ class TamuController extends BaseController
     }
 
     /**
-     * ====================================================================
-     * FUNGSI LAINNYA
-     * ====================================================================
+     * Menampilkan halaman edit profil tamu.
      */
-
     public function editProfil()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
@@ -222,124 +228,60 @@ class TamuController extends BaseController
         }
         $data = [
             'title' => 'Edit Profil',
-            'tamu'  => $userData
+            'tamu'  => $userData,
+            'validation' => \Config\Services::validation()
         ];
         return view('tamu_edit_profil', $data);
     }
 
+    /**
+     * Memproses update profil tamu.
+     */
     public function updateProfil()
     {
         if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
             return redirect()->to(base_url('login'));
         }
         $id_tamu = session()->get('id_tamu');
+        
+        // Aturan validasi
+        $rules = [
+            'nama_tamu'  => 'required|alpha_space|min_length[3]',
+            'no_hp_tamu' => 'required|numeric|min_length[10]|max_length[15]',
+            'email'      => "required|valid_email|is_unique[tamu.email,id_tamu,{$id_tamu}]|is_unique[admin.email]",
+        ];
+
+        // Jika password diisi, tambahkan validasi password
+        if ($this->request->getPost('password')) {
+            $rules['password'] = 'required|min_length[8]';
+            $rules['password_confirm'] = 'required|matches[password]';
+        }
+
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+        
         $dataToUpdate = [
-            'id_tamu'    => $id_tamu,
             'nama_tamu'  => $this->request->getPost('nama_tamu'),
             'no_hp_tamu' => $this->request->getPost('no_hp_tamu'),
             'email'      => $this->request->getPost('email'),
         ];
+        
         $password = $this->request->getPost('password');
         if (!empty($password)) {
-            $dataToUpdate['password'] = $password;
+            $dataToUpdate['password'] = md5($password);
         }
-        if ($this->tamuModel->save($dataToUpdate) === false) {
+        
+        if ($this->tamuModel->update($id_tamu, $dataToUpdate) === false) {
             return redirect()->back()->withInput()->with('errors', $this->tamuModel->errors());
         }
+        
+        // Update data session jika perlu
         session()->set([
             'nama' => $dataToUpdate['nama_tamu'],
             'email' => $dataToUpdate['email'],
         ]);
+        
         return redirect()->to(base_url('tamu/dashboard'))->with('success', 'Profil berhasil diperbarui.');
-    }
-
-    public function reservasi_form()
-    {
-        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
-            return redirect()->to(base_url('login'));
-        }
-
-        $idUnitKamar = $this->request->getGet('id_unit_kamar');
-        $tglMasuk = $this->request->getGet('tgl_masuk');
-        $tglKeluar = $this->request->getGet('tgl_keluar');
-        $jumlahTamu = $this->request->getGet('jumlah_tamu');
-        $hargaKamar = $this->request->getGet('harga_kamar');
-
-        if (!$idUnitKamar || !$tglMasuk || !$tglKeluar || !$jumlahTamu) {
-            session()->setFlashdata('error', 'Data reservasi tidak lengkap.');
-            return redirect()->to(base_url('tamu/dashboard'));
-        }
-
-        $idTamu = session()->get('id_tamu');
-        $dataTamu = $this->tamuModel->find($idTamu);
-        $unitKamar = $this->unitKamarModel->find($idUnitKamar);
-        $kamar = $this->kamarModel->find($unitKamar['id_kamar']);
-
-        $checkin = new DateTime($tglMasuk);
-        $checkout = new DateTime($tglKeluar);
-        $jumlahHari = $checkout->diff($checkin)->days;
-        $totalHarga = $jumlahHari * $hargaKamar;
-
-        $data = [
-            'title' => 'Form Reservasi Kamar',
-            'tamu' => $dataTamu,
-            'kamar' => $kamar,
-            'unit_kamar' => $unitKamar,
-            'tgl_masuk' => $tglMasuk,
-            'tgl_keluar' => $tglKeluar,
-            'jumlah_tamu' => $jumlahTamu,
-            'jumlah_hari' => $jumlahHari,
-            'harga_kamar' => $hargaKamar,
-            'total_harga' => $totalHarga
-        ];
-        return view('tamu/reservasi_form', $data);
-    }
-
-    public function proses_reservasi()
-    {
-        if (!session()->get('isLoggedIn') || session()->get('role') !== 'tamu') {
-            return $this->failUnauthorized('Akses tidak diizinkan.');
-        }
-
-        $json = $this->request->getJSON(true);
-        $idTamu = session()->get('id_tamu');
-        $idUnitKamar = $json['id_unit_kamar'];
-        $tglMasuk = $json['tgl_masuk'];
-        $tglKeluar = $json['tgl_keluar'];
-        $totalHarga = $json['total_harga'];
-        $namaTamu = $json['nama_tamu'];
-        $noHpTamu = $json['no_hp_tamu'];
-
-        if ($namaTamu || $noHpTamu) {
-            $updateData = [];
-            if ($namaTamu) $updateData['nama'] = $namaTamu;
-            if ($noHpTamu) $updateData['no_hp'] = $noHpTamu;
-            if (!empty($updateData)) {
-                $this->tamuModel->update($idTamu, $updateData);
-            }
-        }
-
-        try {
-            $reservasiData = [
-                'id_tamu' => $idTamu,
-                'tgl_reservasi' => date('Y-m-d H:i:s'),
-                'tgl_masuk' => $tglMasuk,
-                'tgl_keluar' => $tglKeluar,
-                'total_harga' => $totalHarga,
-                'status_reservasi' => 'pending',
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ];
-            $idReservasi = $this->reservasiModel->insert($reservasiData);
-
-            if ($idReservasi) {
-                // Anda mungkin perlu menambahkan data ke detail_reservasi_kamar di sini juga
-                return $this->respondCreated(['status' => 'success', 'message' => 'Reservasi berhasil dibuat', 'id_reservasi' => $idReservasi]);
-            } else {
-                return $this->fail('Gagal membuat reservasi');
-            }
-        } catch (\Exception $e) {
-            return $this->failServerError('Terjadi kesalahan: ' . $e->getMessage());
-        }
     }
 }
