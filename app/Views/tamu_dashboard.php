@@ -310,11 +310,11 @@
             <form id="bookingForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label for="checkin_date" class="block text-gray-300 text-sm font-bold mb-2">Tanggal Check-in:</label>
-                    <input type="date" id="checkin_date" name="tgl_masuk" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required min="<?= date('Y-m-d') ?>">
+                    <input type="date" id="checkin_date" name="tgl_masuk" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
                 <div>
                     <label for="checkout_date" class="block text-gray-300 text-sm font-bold mb-2">Tanggal Check-out:</label>
-                    <input type="date" id="checkout_date" name="tgl_keluar" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required min="<?= date('Y-m-d', strtotime('+1 day')) ?>">
+                    <input type="date" id="checkout_date" name="tgl_keluar" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-500" required>
                 </div>
                 <div>
                     <label for="num_guests" class="block text-gray-300 text-sm font-bold mb-2">Jumlah Tamu:</label>
@@ -499,8 +499,7 @@
                                     <p class="text-gray-300">Deskripsi: ${room.deskripsi || 'Tidak ada deskripsi.'}</p>
                                     <p class="text-2xl font-bold text-red-400 mt-auto">Rp ${parseFloat(room.harga_kamar).toLocaleString('id-ID')}</p>
                                     <button class="book-room-btn w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
-                                            data-id-unit-kamar="${room.id_unit_kamar}"
-                                            data-harga-kamar="${room.harga_kamar}"
+                                            data-id-kamar="${room.id_kamar}"
                                             data-tipe-kamar="${room.tipe_kamar}"
                                             data-nomor-kamar="${room.nomor_kamar}">
                                         Pesan Kamar Ini
@@ -513,8 +512,7 @@
                         // Add event listeners for booking buttons
                         document.querySelectorAll('.book-room-btn').forEach(button => {
                             button.addEventListener('click', async (event) => {
-                                const idUnitKamar = event.target.dataset.idUnitKamar;
-                                const hargaKamar = parseFloat(event.target.dataset.hargaKamar);
+                                const idKamar = event.target.dataset.idKamar;
                                 const tipeKamar = event.target.dataset.tipeKamar;
                                 const nomorKamar = event.target.dataset.nomorKamar;
 
@@ -530,21 +528,20 @@
                                             'X-Requested-With': 'XMLHttpRequest'
                                         },
                                         body: JSON.stringify({
-                                            id_unit_kamar: idUnitKamar,
+                                            id_kamar: idKamar,
                                             tgl_masuk: checkinDate,
-                                            tgl_keluar: checkoutDate,
-                                            harga_kamar: hargaKamar // Pass harga_kamar for total price calculation in backend
+                                            tgl_keluar: checkoutDate
                                         })
                                     });
 
                                     const reservationData = await reservationResponse.json();
 
-                                    if (reservationData.status === 'success') {
+                                    if (reservationResponse.ok && reservationData.status === 'success') {
                                         alert('Pemesanan berhasil! ID Reservasi Anda: ' + reservationData.id_reservasi);
-                                        // Optional: Redirect to reservation history or clear form
                                         window.location.reload(); // Reload dashboard to reflect changes
                                     } else {
-                                        alert('Pemesanan gagal: ' + reservationData.message);
+                                        // Display server-side error message
+                                        alert('Pemesanan gagal: ' + (reservationData.message || 'Terjadi kesalahan pada server.'));
                                     }
 
                                 } catch (error) {
@@ -568,4 +565,4 @@
     </script>
 
 </body>
-</html>
+</ht

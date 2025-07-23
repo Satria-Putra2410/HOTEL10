@@ -6,7 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\ReservasiModel;
 use App\Models\KamarModel;
 use App\Models\TamuModel;
-use App\Models\DetailReservasiKamarModel; // Diperlukan untuk getApiRiwayat
 use CodeIgniter\API\ResponseTrait;
 use DateTime;
 
@@ -57,9 +56,8 @@ class TamuController extends BaseController
         }
 
         $db = \Config\Database::connect();
-        // Perubahan: Select 'id_kamar' langsung dari detail reservasi
         $reservedKamarIds = $db->table('reservasi r')
-            ->select('drk.id_kamar') // Tidak ada lagi id_unit_kamar
+            ->select('drk.id_kamar')
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
             ->where('r.status !=', 'selesai')
             ->groupStart()
@@ -70,11 +68,9 @@ class TamuController extends BaseController
 
         $reservedIds = array_column($reservedKamarIds, 'id_kamar');
 
-        // Perubahan: Query langsung ke KamarModel
         $availableRooms = $this->kamarModel->where('jumlah_tamu >=', $jumlah_tamu);
             
         if (!empty($reservedIds)) {
-            // Perubahan: Pengecekan pada kolom 'id_kamar'
             $availableRooms->whereNotIn('id_kamar', $reservedIds);
         }
             
@@ -97,24 +93,24 @@ class TamuController extends BaseController
         }
 
         $input = $this->request->getJSON(true);
-        // Perubahan: Menggunakan id_kamar, bukan id_unit_kamar
         $id_kamar = $input['id_kamar'] ?? null;
         $tgl_masuk = $input['tgl_masuk'] ?? null;
         $tgl_keluar = $input['tgl_keluar'] ?? null;
         
-        // Ambil harga dari database untuk keamanan, bukan dari input
+        // PERBAIKAN KUNCI: Ambil harga dari database, BUKAN dari input.
         $room = $this->kamarModel->find($id_kamar);
         if (!$room) {
             return $this->failNotFound('Kamar tidak ditemukan.');
         }
+        // Harga yang valid dan aman diambil dari sini.
         $harga_kamar = $room['harga_kamar'];
 
+        // Validasi bahwa semua data yang diperlukan ada.
         if (!$id_kamar || !$tgl_masuk || !$tgl_keluar || !$harga_kamar) {
             return $this->failValidationError('Data pemesanan tidak lengkap.');
         }
 
         $db = \Config\Database::connect();
-        // Perubahan: Pengecekan ke 'drk.id_kamar'
         $isBooked = $db->table('reservasi r')
             ->join('detail_reservasi_kamar drk', 'drk.id_reservasi = r.id_reservasi')
             ->where('drk.id_kamar', $id_kamar) 
@@ -137,6 +133,7 @@ class TamuController extends BaseController
             return $this->failValidationError('Durasi reservasi tidak valid.');
         }
 
+        // Total harga dihitung menggunakan harga dari database.
         $total_harga_reservasi = $harga_kamar * $numberOfNights;
 
         $reservasiData = [
@@ -147,24 +144,32 @@ class TamuController extends BaseController
             'status'                => 'Reserved' 
         ];
 
-        $db->transBegin();
-        try {
-            $this->reservasiModel->insert($reservasiData);
-            $id_reservasi = $this->reservasiModel->getInsertID();
+        // Menggunakan metode transaksi otomatis dari CodeIgniter 4.
+        $db->transStart();
 
-            $detailReservasiKamarData = [
-                'jumlah_malam_kamar' => $numberOfNights,
-                'id_reservasi'       => $id_reservasi,
-                'id_kamar'           => $id_kamar // Perubahan: Menggunakan id_kamar
-            ];
-            $db->table('detail_reservasi_kamar')->insert($detailReservasiKamarData);
+        // 1. Insert ke tabel 'reservasi'
+        $db->table('reservasi')->insert($reservasiData);
+        $id_reservasi = $db->insertID();
 
-            $db->transCommit(); 
+        // 2. Insert ke tabel 'detail_reservasi_kamar'
+        $detailReservasiKamarData = [
+            'jumlah_malam_kamar' => $numberOfNights,
+            'id_reservasi'       => $id_reservasi,
+            'id_kamar'           => $id_kamar
+        ];
+        $db->table('detail_reservasi_kamar')->insert($detailReservasiKamarData);
+
+        // Menyelesaikan transaksi. CodeIgniter akan otomatis commit jika berhasil,
+        // atau rollback jika ada kesalahan.
+        $db->transComplete();
+
+        if ($db->transStatus() === false) {
+            // Jika transaksi gagal, catat error dan kirim respons error.
+            log_message('error', '[TamuController] Create Reservation Transaction Failed.');
+            return $this->failServerError('Terjadi kesalahan saat memproses pemesanan. Transaksi database gagal.');
+        } else {
+            // Jika transaksi berhasil.
             return $this->respondCreated(['status' => 'success', 'message' => 'Pemesanan berhasil!', 'id_reservasi' => $id_reservasi]);
-
-        } catch (\Exception $e) {
-            $db->transRollback(); 
-            return $this->failServerError('Terjadi kesalahan saat memproses pemesanan: ' . $e->getMessage());
         }
     }
     
@@ -195,8 +200,6 @@ class TamuController extends BaseController
         }
 
         try {
-            // Pastikan method getRiwayatByTamu di ReservasiModel sudah benar
-            // dan melakukan join ke tabel kamar, bukan unit_kamar
             $data = $this->reservasiModel
                          ->select('reservasi.*, kamar.tipe_kamar, kamar.nomor_kamar')
                          ->join('detail_reservasi_kamar', 'detail_reservasi_kamar.id_reservasi = reservasi.id_reservasi', 'left')
@@ -244,14 +247,12 @@ class TamuController extends BaseController
         }
         $id_tamu = session()->get('id_tamu');
         
-        // Aturan validasi
         $rules = [
             'nama_tamu'  => 'required|alpha_space|min_length[3]',
             'no_hp_tamu' => 'required|numeric|min_length[10]|max_length[15]',
             'email'      => "required|valid_email|is_unique[tamu.email,id_tamu,{$id_tamu}]|is_unique[admin.email]",
         ];
 
-        // Jika password diisi, tambahkan validasi password
         if ($this->request->getPost('password')) {
             $rules['password'] = 'required|min_length[8]';
             $rules['password_confirm'] = 'required|matches[password]';
@@ -276,7 +277,6 @@ class TamuController extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->tamuModel->errors());
         }
         
-        // Update data session jika perlu
         session()->set([
             'nama' => $dataToUpdate['nama_tamu'],
             'email' => $dataToUpdate['email'],
