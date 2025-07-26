@@ -13,7 +13,7 @@
     
     .hero {
             height: 100vh;
-            background-image: url('<?= base_url("assets/bandung.png") ?>'); 
+            background-image: url('<?= base_url("assets/bdg.jpg") ?>'); 
             background-size: cover;
             background-position: center;
             position: relative;
@@ -119,10 +119,10 @@
             z-index: 1;
         }
 
-        #c1 { background-image: url("assets/floating.jpg"); }
+        #c1 { background-image: url("assets/lobby.jpeg"); }
         #c2 { background-image: url("assets/musola.jpeg");}
-        #c3 { background-image: url("assets/tangkuban.jpg");}
-        #c4 { background-image: url("assets/tsm.jpg");}
+        #c3 { background-image: url("assets/lorong.jpeg");}
+        #c4 { background-image: url("assets/akses.jpeg");}
 
         .main:hover #c1 { transform: translateX(-100px) rotate(-40deg); }
         .main:hover #c2 { transform: translateX(-50px) rotate(-30deg); }
@@ -193,10 +193,10 @@
         <!-- Bagian Kiri (Cards) -->
         <div class="w-full lg:w-1/2">
             <div class="main flex gap-4 relative h-[40vmax] justify-center items-center">
-                <div class="card rounded-2xl" id="c1"></div>
-                <div class="card rounded-2xl" id="c2"></div>
-                <div class="card rounded-2xl" id="c3"></div>
-                <div class="card rounded-2xl" id="c4"></div>
+                <div class="card rounded-2xl bg-cover" id="c1"></div>
+                <div class="card rounded-2xl bg-cover" id="c2"></div>
+                <div class="card rounded-2xl bg-cover" id="c3"></div>
+                <div class="card rounded-2xl bg-cover" id="c4"></div>
             </div>
         </div>
 
@@ -205,9 +205,8 @@
             <div class="max-w-xl">
                 <h1 class="text-3xl font-bold  text-white select-none mb-4">Hotel Sepuluh Bandung</h1>
                 <p class="text-lg  text-red-400 select-none leading-relaxed" style="font-family: 'lato',sans-serif;">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt odio libero maxime reprehenderit velit
-                    accusamus quos hic temporibus maiores placeat! Laboriosam eius, voluptatem culpa architecto ea sint
-                    rerum porro aliquam.
+                    Tempat nyaman untuk setiap perjalanan Anda.
+                    Kami di Hotel10 berkomitmen memberikan pelayanan terbaik dengan kamar yang bersih, fasilitas modern, dan suasana yang hangat layaknya rumah sendiri.
                 </p>
             </div>
         </div>

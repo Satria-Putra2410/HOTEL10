@@ -59,7 +59,7 @@
 
     <div class="w-[420px] bg-white/30 backdrop-blur-md rounded-xl p-8">
         <a href="<?= base_url('/') ?>">
-            <button type="button" aria-label="Close" class="float-right text-black text-lg">&times;</button>
+            <button type="button" aria-label="Close" class="float-right text-black text-4xl">&times;</button>
         </a>
         <h1 class="text-3xl font-extrabold text-center">Login</h1>
         <form action="<?= base_url('login') ?>" method="POST" class="mt-6">
@@ -82,7 +82,7 @@
         </form>
 
         <a href="<?= base_url('register') ?>"
-            class="block  text-center mt-4 w-full h-11 bg-gray-100 rounded-full shadow-md text-gray-800 font-medium hover:bg-black hover:text-white hover:font-semibold transition duration-500">Daftar Akun</a>
+            class="block  text-center mt-4 w-full h-11 bg-gray-100 rounded-full shadow-md text-gray-800 font-medium hover:bg-black hover:text-white hover:font-semibold transition duration-500">Register</a>
     </div>
 
     <div id="logoutPopup" class="popup">
